@@ -260,7 +260,7 @@ def loadRooms():
                         "name":"door5",
                         "type":"door",
                         "draw":[400, 15, 105, 30, green, "rect"],
-                        "open":False,
+                        "open":True,
                         "used":False,
                         "whenDraw":0
                     }

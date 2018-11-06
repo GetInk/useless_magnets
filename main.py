@@ -675,46 +675,24 @@ while True:
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
-        for stuff1 in where.itemsR:
-            for stuff2 in stuff1:
-                if stuff2 == "pedistal2":
-                    if stuff1[stuff2]["pressed"] == False:
-                        message("DOORS UNLOCKED", red, 0, 0, 75, screenSizeX, screenSizeY, True)
-                        for pedistal in where.itemsR:
-                            for inPedistal in pedistal:
-                                if inPedistal == "pedistal1":
-                                    if pedistal[inPedistal]["pressed"] == False:
-                                        for door in where.itemsR:
-                                            for inDoor in door:
-                                                if inDoor == "door1":
-                                                    door[inDoor]["open"] = True
-                                                    if holdingPB == True:
-                                                        message("CANT GO THROUGH DOOR WITH BLOCK", red, 0, 120, 35, screenSizeX, screenSizeY, True)
-                                    else:
-                                        for door in where.itemsR:
-                                            for inDoor in door:
-                                                if inDoor == "door1":
-                                                    door[inDoor]["open"] = False
-                                elif inPedistal == "pedistal3":
-                                    if pedistal[inPedistal]["pressed"] == False:
-                                        for door in where.itemsR:
-                                            for inDoor in door:
-                                                if inDoor == "door2":
-                                                    door[inDoor]["open"] = True
-                                                    if holdingPB == True:
-                                                        message("CANT GO THROUGH DOOR WITH BLOCK", red, 0, 120, 35, screenSizeX, screenSizeY, True)
-                                    else:
-                                        for door in where.itemsR:
-                                            for inDoor in door:
-                                                if inDoor == "door2":
-                                                    door[inDoor]["open"] = False
-                    else:
+        for pedistal in where.itemsR:
+            for inPedistal in pedistal:
+                if inPedistal == "pedistal1":
+                    print(inPedistal, pedistal[inPedistal]["items"])
+                    if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
+                        print("does")
                         for door in where.itemsR:
                             for inDoor in door:
                                 if inDoor == "door1":
-                                    door[inDoor]["open"] = False
-                                elif inDoor == "door2":
-                                    door[inDoor]["open"] = False
+                                    door[inDoor]["open"] = True
+                elif inPedistal == "pedistal3":
+                    print(inPedistal, pedistal[inPedistal]["items"])
+                    if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
+                        print("does")
+                        for door in where.itemsR:
+                            for inDoor in door:
+                                if inDoor == "door2":
+                                    door[inDoor]["open"] = True
     #   FINAL ITEMPP
     if where.where == room["puzzleRoom"]:
         for item in where.itemsR:
@@ -735,9 +713,9 @@ while True:
         for inItem in item:
             if item[inItem]["type"] == "door":
                 if item[inItem]["open"] == True:
-                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = darkGray
+                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = green
                 else:
-                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = gray
+                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
 
     tick(fps)
     updateDisplay()

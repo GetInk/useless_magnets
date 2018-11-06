@@ -51,7 +51,7 @@ def loadRooms():
                     "pedistal1":{
                         "name":"pedistal1",
                         "type":"pedistal",
-                        "draw":[130, 400, 190, white, "squ"],
+                        "draw":[130, 400, 190, yellow, "squ"],
                         "whenDraw": 0,
                         "items":[],
                         "pressure":True,
@@ -62,7 +62,7 @@ def loadRooms():
                     "pedistal2":{
                         "name":"pedistal2",
                         "type":"pedistal",
-                        "draw":[400, 400, 190, yellow, "squ"],
+                        "draw":[400, 400, 190, white, "squ"],
                         "whenDraw": 0,
                         "items":["block1", "block2", "block3", "block4", "block5"],
                         "pressure":True,
@@ -73,7 +73,7 @@ def loadRooms():
                     "pedistal3":{
                         "name":"pedistal3",
                         "type":"pedistal",
-                        "draw":[670, 400, 190, white, "squ"],
+                        "draw":[670, 400, 190, yellow, "squ"],
                         "whenDraw": 0,
                         "items":[],
                         "pressure":True,
@@ -84,7 +84,7 @@ def loadRooms():
                     "door1":{
                         "name":"door1",
                         "type":"door",
-                        "draw":[15, 200, 30, 105, gray, "rect"],
+                        "draw":[15, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
                         "used": False
@@ -94,7 +94,7 @@ def loadRooms():
                     "door2":{
                         "name":"door2",
                         "type":"door",
-                        "draw":[785, 200, 30, 105, gray, "rect"],
+                        "draw":[785, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
                         "used": False
@@ -113,7 +113,7 @@ def loadRooms():
                     "door1":{
                         "name":"door1",
                         "type":"door",
-                        "draw":[785, 200, 30, 105, gray, "rect"],
+                        "draw":[785, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False,
@@ -135,7 +135,7 @@ def loadRooms():
                     "door3":{
                         "name":"door3",
                         "type":"door",
-                        "draw":[700, 785, 105, 30, gray, "rect"],
+                        "draw":[700, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -154,7 +154,7 @@ def loadRooms():
                     "door2":{
                         "name":"door2",
                         "type":"door",
-                        "draw":[15, 200, 30, 105, gray, "rect"],
+                        "draw":[15, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False,
@@ -176,7 +176,7 @@ def loadRooms():
                     "door4":{
                         "name":"door4",
                         "type":"door",
-                        "draw":[100, 785, 105, 30, gray, "rect"],
+                        "draw":[100, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -195,7 +195,7 @@ def loadRooms():
                     "door3":{
                         "name":"door3",
                         "type":"door",
-                        "draw":[94, 15, 105, 30, gray, "rect"],
+                        "draw":[94, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -205,7 +205,7 @@ def loadRooms():
                     "door4":{
                         "name":"door4",
                         "type":"door",
-                        "draw":[707, 15, 105, 30, gray, "rect"],
+                        "draw":[707, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -240,7 +240,7 @@ def loadRooms():
                     "door5":{
                         "name":"door5",
                         "type":"door",
-                        "draw":[400, 785, 105, 30, gray, "rect"],
+                        "draw":[400, 785, 105, 30, green, "rect"],
                         "open":True,
                         "used":False,
                         "whenDraw":0
@@ -259,14 +259,14 @@ def loadRooms():
                     "door5":{
                         "name":"door5",
                         "type":"door",
-                        "draw":[400, 15, 105, 30, gray, "rect"],
+                        "draw":[400, 15, 105, 30, green, "rect"],
                         "open":False,
                         "used":False,
                         "whenDraw":0
                     }
                 }
             ],
-            "message":[["CONGRADJULASIONS!", yellow, 0, -50, 70, False], ["YOU DID IT!", yellow, 0, 50, 85, False]],
+            "message":[["CONGRADJULATIONS!", yellow, 0, -50, 70, False], ["YOU DID IT!", yellow, 0, 50, 85, False]],
             "npc":[],
             "background":[],
             "light":True

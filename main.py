@@ -678,17 +678,13 @@ while True:
         for pedistal in where.itemsR:
             for inPedistal in pedistal:
                 if inPedistal == "pedistal1":
-                    print(inPedistal, pedistal[inPedistal]["items"])
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
-                        print("does")
                         for door in where.itemsR:
                             for inDoor in door:
                                 if inDoor == "door1":
                                     door[inDoor]["open"] = True
                 elif inPedistal == "pedistal3":
-                    print(inPedistal, pedistal[inPedistal]["items"])
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
-                        print("does")
                         for door in where.itemsR:
                             for inDoor in door:
                                 if inDoor == "door2":

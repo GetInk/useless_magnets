@@ -52,7 +52,7 @@ class Door():
 # DISPLAY VARS
 screenSizeX = 800
 screenSizeY = 800
-fps = 90
+fps = 100
 gameName = "Useless Magnets"
 
 screenSize(screenSizeX, screenSizeY, gameName)

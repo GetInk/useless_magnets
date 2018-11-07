@@ -264,6 +264,17 @@ def loadRooms():
                         "used":False,
                         "whenDraw":0
                     }
+                },
+                {
+                    "key":{
+                        "name":"key",
+                        "type":"item",
+                        "ability":"key",
+                        "unlocks":"DOOR",
+                        "draw":[400, 700, 50, orange, "squ"],
+                        "weight":0,
+                        "whenDraw":8
+                    }
                 }
             ],
             "message":[["CONGRADJULATIONS!", yellow, 0, -50, 70, False], ["YOU DID IT!", yellow, 0, 50, 85, False]],

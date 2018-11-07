@@ -87,6 +87,7 @@ def loadRooms():
                         "draw":[15, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
+                        "justUnlocked":False,
                         "used": False
                 }
                 },
@@ -97,6 +98,7 @@ def loadRooms():
                         "draw":[785, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
+                        "justUnlocked":False,
                         "used": False
                     }
                 }
@@ -116,6 +118,7 @@ def loadRooms():
                         "draw":[785, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False,
                     }
                 },
@@ -138,6 +141,7 @@ def loadRooms():
                         "draw":[700, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 }
@@ -157,6 +161,7 @@ def loadRooms():
                         "draw":[15, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False,
                     }
                 },
@@ -179,6 +184,7 @@ def loadRooms():
                         "draw":[100, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 }
@@ -198,6 +204,7 @@ def loadRooms():
                         "draw":[94, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 },
@@ -208,6 +215,7 @@ def loadRooms():
                         "draw":[707, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 },
@@ -243,6 +251,7 @@ def loadRooms():
                         "draw":[400, 785, 105, 30, green, "rect"],
                         "open":True,
                         "used":False,
+                        "justUnlocked":False,
                         "whenDraw":0
                     }
                 }
@@ -262,6 +271,7 @@ def loadRooms():
                         "draw":[400, 15, 105, 30, green, "rect"],
                         "open":True,
                         "used":False,
+                        "justUnlocked":False,
                         "whenDraw":0
                     }
                 },

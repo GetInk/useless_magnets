@@ -672,6 +672,13 @@ while True:
         canMoveLeft = True
         canMoveUp = True
         canMoveDown = True
+    #   KEYS
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            if Item["type"] == "item":
+                if Item["ability"] == "key":
+                    unlocks = Item["unlocks"]
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:

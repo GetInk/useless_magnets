@@ -811,10 +811,15 @@ def rand(num1, num2):
     randnum = random.randint(num1, num2)
     return randnum
     
-def message(message, color, centerX, centerY, Fsize, screenSizeX = 0, screenSizeY = 0, bold = False, italic = False):
-    font = pygame.font.SysFont("comicsansms", Fsize, bold, italic)
-    text = font.render(message, True, color)
+def message(words, color, centerX, centerY, fSize, screenSizeX = 0, screenSizeY = 0, bold = False, italic = False):
+    font = pygame.font.SysFont("comicsansms", fSize, bold, italic)
+    text = font.render(words, True, color)
     screen.blit(text, ( (screenSizeX - text.get_width()) / 2 + centerX, (screenSizeY - text.get_height()) / 2 + centerY) )
+
+def renderAnounce(message, color, fSize, screenSizeX, screenSizeY):
+    font = pygame.font.SysFont("comicsansms", fSize)
+    text = font.render(message, True, color)
+    screen.blit(text, (screenSizeX-text.get_width()-10, screenSizeY-text.get_height()*1.1))
 
 
 

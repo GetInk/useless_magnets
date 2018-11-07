@@ -49,15 +49,15 @@ class Door():
                     newRoom = Where(room[conection[key]])
                     return newRoom
 class Timer():
-    count = 0
+    num = 0
     def count(self, countTime):
-        self.count += 1
-        if self.count >= countTime:
+        self.num += 1
+        if self.num >= countTime:
             return True
         else:
             return False
     def reset(self):
-        self.count = 0
+        self.num = 0
 
 # DISPLAY VARS
 screenSizeX = 800
@@ -68,6 +68,9 @@ gameName = "Useless Magnets"
 screenSize(screenSizeX, screenSizeY, gameName)
 nextFrame = clock()
 
+# DEFS
+def anounce(anouncement, color=white):
+    renderAnounce(anouncement, color, 25, screenSizeX, screenSizeY)
 # PC SIZE FINDER VARS
 doSquare = False
 squareWidth = 135

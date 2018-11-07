@@ -744,10 +744,23 @@ while True:
             if Item["type"] == "door":
                 if Item["justUnlocked"] == True:
                     if anounceUnlocking.count(75) == False:
-                        anounce("%s has ben unlocked" % Item["name"])
+                        anounce("Unlocked %s" % Item["name"])
                     else:
                         anounceUnlocking.reset()
                         Item["justUnlocked"] = False
+    '''
+    #   ANOUNCE DOOR UNLOCKING TEST
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            if Item["type"] == "door":
+                if Item["justUnlocked"] == True:
+                    if anounceUnlocking.count(75) == False:
+                        anounce("Unlocked %s" % Item["name"])
+                    else:
+                        anounceUnlocking.reset()
+                        Item["justUnlocked"] = False
+    '''
     tick(fps)
     updateDisplay()
 

@@ -48,6 +48,16 @@ class Door():
                 if key == where.roomKey:
                     newRoom = Where(room[conection[key]])
                     return newRoom
+class Timer():
+    count = 0
+    def count(self, countTime):
+        self.count += 1
+        if self.count >= countTime:
+            return True
+        else:
+            return False
+    def reset(self):
+        self.count = 0
 
 # DISPLAY VARS
 screenSizeX = 800

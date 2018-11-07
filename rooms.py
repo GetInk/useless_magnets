@@ -9,7 +9,7 @@ def loadRooms():
             "items":[
                 {
                     "block5":{
-                        "name":"block5",
+                        "name":"Block 5",
                         "type":"pedistalBlock",
                         "draw":[400, 400, 30, gray, "squ"],
                         "whenDraw": 5
@@ -17,7 +17,7 @@ def loadRooms():
                 },
                 {
                     "block4":{
-                        "name":"block4",
+                        "name":"Block 4",
                         "type":"pedistalBlock",
                         "draw":[400, 400, 60, cian, "squ"],
                         "whenDraw": 4
@@ -25,7 +25,7 @@ def loadRooms():
                 },
                 {
                     "block3":{
-                        "name":"block3",
+                        "name":"Block 3",
                         "type":"pedistalBlock",
                         "draw":[400, 400, 90, blue, "squ"],
                         "whenDraw": 3
@@ -33,7 +33,7 @@ def loadRooms():
                 },
                 {
                     "block2":{
-                        "name":"block2",
+                        "name":"Block 2",
                         "type":"pedistalBlock",
                         "draw":[400, 400, 120, purple, "squ"],
                         "whenDraw": 2
@@ -41,7 +41,7 @@ def loadRooms():
                 },
                 {
                     "block1":{
-                        "name":"block1",
+                        "name":"Block 1",
                         "type":"pedistalBlock",
                         "draw":[400, 400, 150, darkBlue, "squ"],    
                         "whenDraw": 1
@@ -49,7 +49,7 @@ def loadRooms():
                 },
                 {
                     "pedistal1":{
-                        "name":"pedistal1",
+                        "name":"Pedistal 1",
                         "type":"pedistal",
                         "draw":[130, 400, 190, yellow, "squ"],
                         "whenDraw": 0,
@@ -60,7 +60,7 @@ def loadRooms():
                 },
                 {
                     "pedistal2":{
-                        "name":"pedistal2",
+                        "name":"Pedistal 2",
                         "type":"pedistal",
                         "draw":[400, 400, 190, white, "squ"],
                         "whenDraw": 0,
@@ -71,7 +71,7 @@ def loadRooms():
                 },
                 {
                     "pedistal3":{
-                        "name":"pedistal3",
+                        "name":"Pedistal 3",
                         "type":"pedistal",
                         "draw":[670, 400, 190, yellow, "squ"],
                         "whenDraw": 0,
@@ -82,21 +82,23 @@ def loadRooms():
                 },
                 {
                     "door1":{
-                        "name":"door1",
+                        "name":"Door 1",
                         "type":"door",
                         "draw":[15, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
+                        "justUnlocked":False,
                         "used": False
                 }
                 },
                     {
                     "door2":{
-                        "name":"door2",
+                        "name":"Door 2",
                         "type":"door",
                         "draw":[785, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": False,
+                        "justUnlocked":False,
                         "used": False
                     }
                 }
@@ -111,17 +113,18 @@ def loadRooms():
             "items":[
                 {
                     "door1":{
-                        "name":"door1",
+                        "name":"Door 1",
                         "type":"door",
                         "draw":[785, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False,
                     }
                 },
                 {
                     "magnet1":{
-                        "name":"magnet1",
+                        "name":"Magnet 1",
                         "type":"item",
                         "ability":"magnet",
                         "conected":"magnet2",
@@ -133,11 +136,12 @@ def loadRooms():
                 },
                 {
                     "door3":{
-                        "name":"door3",
+                        "name":"Door 3",
                         "type":"door",
                         "draw":[700, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 }
@@ -152,17 +156,18 @@ def loadRooms():
             "items":[
                 {
                     "door2":{
-                        "name":"door2",
+                        "name":"Door 2",
                         "type":"door",
                         "draw":[15, 200, 30, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False,
                     }
                 },
                 {
                     "magnet2":{
-                        "name":"magnet2",
+                        "name":"Magnet 2",
                         "type":"item",
                         "ability":"magnet",
                         "conected":"magnet1",
@@ -174,11 +179,12 @@ def loadRooms():
                 },
                 {
                     "door4":{
-                        "name":"door4",
+                        "name":"Door 4",
                         "type":"door",
                         "draw":[100, 785, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 }
@@ -193,27 +199,29 @@ def loadRooms():
             "items":[
                 {
                     "door3":{
-                        "name":"door3",
+                        "name":"Door 3",
                         "type":"door",
                         "draw":[94, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 },
                 {
                     "door4":{
-                        "name":"door4",
+                        "name":"Door 4",
                         "type":"door",
                         "draw":[707, 15, 105, 30, green, "rect"],
                         "whenDraw":0,
                         "open":True,
+                        "justUnlocked":False,
                         "used":False
                     }
                 },
                 {
                     "wall1":{
-                        "name":"wall1",
+                        "name":"Wall 1",
                         "type":"wall",
                         "draw":[200, 400, 25, 800, white, "rect"],
                         "whenDraw":0
@@ -221,7 +229,7 @@ def loadRooms():
                 },
                 {
                     "wall2":{
-                        "name":"wall2",
+                        "name":"Wall 2",
                         "type":"wall",
                         "draw":[600, 400, 25, 800, white, "rect"],
                         "whenDraw":0
@@ -243,6 +251,7 @@ def loadRooms():
                         "draw":[400, 785, 105, 30, green, "rect"],
                         "open":True,
                         "used":False,
+                        "justUnlocked":False,
                         "whenDraw":0
                     }
                 }
@@ -262,6 +271,7 @@ def loadRooms():
                         "draw":[400, 15, 105, 30, green, "rect"],
                         "open":True,
                         "used":False,
+                        "justUnlocked":False,
                         "whenDraw":0
                     }
                 }

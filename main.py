@@ -48,6 +48,16 @@ class Door():
                 if key == where.roomKey:
                     newRoom = Where(room[conection[key]])
                     return newRoom
+class Timer():
+    num = 0
+    def count(self, countTime):
+        self.num += 1
+        if self.num >= countTime:
+            return True
+        else:
+            return False
+    def reset(self):
+        self.num = 0
 
 # DISPLAY VARS
 screenSizeX = 800
@@ -58,6 +68,9 @@ gameName = "Useless Magnets"
 screenSize(screenSizeX, screenSizeY, gameName)
 nextFrame = clock()
 
+# DEFS
+def anounce(anouncement, color=white):
+    renderAnounce(anouncement, color, 25, screenSizeX, screenSizeY)
 # PC SIZE FINDER VARS
 doSquare = False
 squareWidth = 135
@@ -88,6 +101,7 @@ wallDown = True
 nearestItem = []
 doors = []
 pickableItems = ["item", "pedistalBlock", "door"]
+anounceUnlocking = Timer()
 
 startSprite = me["butcher"]
 startRoom = room["start"]
@@ -672,6 +686,13 @@ while True:
         canMoveLeft = True
         canMoveUp = True
         canMoveDown = True
+    #   KEYS
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            if Item["type"] == "item":
+                if Item["ability"] == "key":
+                    unlocks = Item["unlocks"]
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
@@ -682,13 +703,17 @@ while True:
                         for door in where.itemsR:
                             for inDoor in door:
                                 if inDoor == "door1":
-                                    door[inDoor]["open"] = True
+                                    if door[inDoor]["open"] == False:
+                                        door[inDoor]["open"] = True
+                                        door[inDoor]["justUnlocked"] = True
                 elif inPedistal == "pedistal3":
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
                         for door in where.itemsR:
                             for inDoor in door:
                                 if inDoor == "door2":
-                                    door[inDoor]["open"] = True
+                                    if door[inDoor]["open"] == False:
+                                        door[inDoor]["open"] = True
+                                        door[inDoor]["justUnlocked"] = True
     #   FINAL ITEMPP
     if where.where == room["puzzleRoom"]:
         for item in where.itemsR:
@@ -712,7 +737,17 @@ while True:
                     item[inItem]["draw"][len(item[inItem]["draw"])-2] = green
                 else:
                     item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
-
+    #   ANOUNCE DOOR UNLOCKING
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            if Item["type"] == "door":
+                if Item["justUnlocked"] == True:
+                    if anounceUnlocking.count(75) == False:
+                        anounce("%s has ben unlocked" % Item["name"])
+                    else:
+                        anounceUnlocking.reset()
+                        Item["justUnlocked"] = False
     tick(fps)
     updateDisplay()
 

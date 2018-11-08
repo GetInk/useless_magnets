@@ -285,16 +285,6 @@ def loadRooms():
                         "draw":[400, 400, 25, orange, "squ"],
                         "whenDraw":8
                     }
-                },
-                {
-                    "doorOpener":{
-                        "name":"brarh",
-                        "type":"item",
-                        "ability":None,
-                        "weight":0,
-                        "draw":[200, 200, 25, darkBlue, "squ"],
-                        "whenDraw":100
-                    }
                 }
             ],
             "message":[["BOSS DOOR KEY", yellow, 0, 100, 85, False]],

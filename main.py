@@ -102,6 +102,7 @@ nearestItem = []
 doors = []
 pickableItems = ["item", "pedistalBlock", "door"]
 anounceUnlocking = Timer()
+unlockedDoor = ""
 
 startSprite = me["butcher"]
 startRoom = room["start"]
@@ -705,7 +706,7 @@ while True:
                                 if inDoor == "door1":
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
-                                        door[inDoor]["justUnlocked"] = True
+                                        unlockedDoor = inDoor
                 elif inPedistal == "pedistal3":
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
                         for door in where.itemsR:
@@ -713,7 +714,7 @@ while True:
                                 if inDoor == "door2":
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
-                                        door[inDoor]["justUnlocked"] = True
+                                        unlockedDoor = inDoor
     #   FINAL ITEMPP
     if where.where == room["puzzleRoom"]:
         for item in where.itemsR:
@@ -738,16 +739,16 @@ while True:
                 else:
                     item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
     #   ANOUNCE DOOR UNLOCKING
-    for item in where.itemsR:
-        for inItem in item:
-            Item = item[inItem]
-            if Item["type"] == "door":
-                if Item["justUnlocked"] == True:
+    if unlockedDoor != "":
+        for item in where.itemsR:
+            for inItem in item:
+                if inItem == unlockedDoor:
+                    Item = item[inItem]
                     if anounceUnlocking.count(75) == False:
-                        anounce("%s has ben unlocked" % Item["name"])
+                        anounce("Unlocked %s" % Item["name"])
                     else:
                         anounceUnlocking.reset()
-                        Item["justUnlocked"] = False
+                        unlockedDoor = ""
     tick(fps)
     updateDisplay()
 

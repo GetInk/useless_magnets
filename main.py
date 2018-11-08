@@ -522,80 +522,7 @@ while True:
         shiftRest = 0
     shiftRest +=  shiftAdd
     spaceRest += spaceAdd
-
-    # DO ROOM NAME
-    message(where.roomName, white, 0, -300, 50, screenSizeX, screenSizeY, True)
-    # DO ROOM MESSAGES
-    for Message in where.message:
-        message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
-    # DRAW SQUARE
-    if where.itemsR != []:
-        Sorted = []
-        for item in where.itemsR:
-            for inItem in item:
-                when = item[inItem]["whenDraw"]
-                Sorted.append(when)
-        bubble(Sorted)
-        for inSorted in Sorted:
-            for item in where.itemsR:
-                for inItem in item:
-                    Item = item[inItem]
-                    draw = Item["draw"]
-                    when = Item["whenDraw"]
-                    Type = Item["type"]
-                    shape = draw[len(draw)-1]
-                    if Type != "untuchable":
-                        if Type != "pedistal" and Type != "PP" and Type != "itemPP":
-                            if when == inSorted:
-                                if shape == "squ":
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
-                                elif shape == "rect":
-                                    drawRect(draw[0], draw[1], draw[2], draw[3], draw[4])
-                        elif Type == "pedistal":
-                            if when == inSorted:
-                                pressure = Item["pressure"]
-                                if pressure == True:
-                                    pressed = Item["pressed"]
-                                    if pressed == False:
-                                        drawRect(draw[0], draw[1], draw[2], draw[2], gray)
-                                        drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
-                                    else:
-                                        drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
-                                else:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
-                        elif Type == "PP" or Type == "itemPP":
-                            if when == inSorted:
-                                pressed = Item["pressed"]
-                                if pressed == False:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], gray)
-                                    drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
-                                else:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
-    # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
-    if where.itemsR != []:
-        for item in where.itemsR:
-            for inItem in item:
-                Item = item[inItem]
-                Type = Item["type"]
-                if Type == "pedistal":
-                    pressure = Item["pressure"]
-                    items = Item["items"]
-                    if pressure == True:
-                        if items != []:
-                            Item["pressed"] = True
-                        else:
-                            Item["pressed"] = False
-                elif Type == "itemPP":
-                    draw = Item["draw"]
-                    for item2 in where.itemsR:
-                        for inItem2 in item2:
-                            Item2 = item2[inItem2]
-                            draw2 = Item2["draw"]
-                            if inItem != inItem2:
-                                if draw2[0] < draw[0]+draw[2]/2+draw2[2]/2 and draw2[0] > draw[0]-draw[2]/2-draw2[2]/2 and draw2[1] < draw[1]+draw[len(draw)-3]/2+draw2[len(draw2)-3]/2 and draw2[1] > draw[1]-draw[len(draw)-3]/2-draw2[len(draw2)-3]/2:
-                                    Item["pressed"] = True
-                                else:
-                                    Item["pressed"] = False
+    
     # NEW ITEMS:
     #   MAGNETS
     for item in where.itemsR:
@@ -708,7 +635,7 @@ while True:
                                 Door = door[inDoor]
                                 draw = Door["draw"]
                                 doorSize = [draw[2], draw[3]]
-                                if current.x <= draw[0]+doorSize[0]/2+current.size[0] and current.y > draw[1]-doorSize[1]/2-current.size[1] and current.y < draw[1]+doorSize[1]/2+current.size[1] and current.x > draw[0]-doorSize[0]/2-current.size[0]:
+                                if contact(draw):
                                     if keyPressed("space"):
                                         doTake = False
                                         Door["open"] = True
@@ -718,6 +645,7 @@ while True:
                                         for delItem in range(0, len(current.itemsB)):
                                             if current.itemsB[delItem] == key:
                                                 del current.itemsB[delItem]
+    
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
@@ -782,6 +710,81 @@ while True:
                     unlockedDoor = ""
                     unlockedWith = ""
                     roomAnunce = ""
+    
+    # DRAW SQUARE
+    if where.itemsR != []:
+        Sorted = []
+        for item in where.itemsR:
+            for inItem in item:
+                when = item[inItem]["whenDraw"]
+                Sorted.append(when)
+        bubble(Sorted)
+        for inSorted in Sorted:
+            for item in where.itemsR:
+                for inItem in item:
+                    Item = item[inItem]
+                    draw = Item["draw"]
+                    when = Item["whenDraw"]
+                    Type = Item["type"]
+                    shape = draw[len(draw)-1]
+                    if Type != "untuchable":
+                        if Type != "pedistal" and Type != "PP" and Type != "itemPP":
+                            if when == inSorted:
+                                if shape == "squ":
+                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                elif shape == "rect":
+                                    drawRect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                        elif Type == "pedistal":
+                            if when == inSorted:
+                                pressure = Item["pressure"]
+                                if pressure == True:
+                                    pressed = Item["pressed"]
+                                    if pressed == False:
+                                        drawRect(draw[0], draw[1], draw[2], draw[2], gray)
+                                        drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                    else:
+                                        drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                else:
+                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                        elif Type == "PP" or Type == "itemPP":
+                            if when == inSorted:
+                                pressed = Item["pressed"]
+                                if pressed == False:
+                                    drawRect(draw[0], draw[1], draw[2], draw[2], gray)
+                                    drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                else:
+                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+    # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
+    if where.itemsR != []:
+        for item in where.itemsR:
+            for inItem in item:
+                Item = item[inItem]
+                Type = Item["type"]
+                if Type == "pedistal":
+                    pressure = Item["pressure"]
+                    items = Item["items"]
+                    if pressure == True:
+                        if items != []:
+                            Item["pressed"] = True
+                        else:
+                            Item["pressed"] = False
+                elif Type == "itemPP":
+                    draw = Item["draw"]
+                    for item2 in where.itemsR:
+                        for inItem2 in item2:
+                            Item2 = item2[inItem2]
+                            draw2 = Item2["draw"]
+                            if inItem != inItem2:
+                                if draw2[0] < draw[0]+draw[2]/2+draw2[2]/2 and draw2[0] > draw[0]-draw[2]/2-draw2[2]/2 and draw2[1] < draw[1]+draw[len(draw)-3]/2+draw2[len(draw2)-3]/2 and draw2[1] > draw[1]-draw[len(draw)-3]/2-draw2[len(draw2)-3]/2:
+                                    Item["pressed"] = True
+                                else:
+                                    Item["pressed"] = False
+    # DO ROOM NAME
+    message(where.roomName, white, 0, -300, 50, screenSizeX, screenSizeY, True)
+    # DO ROOM MESSAGES
+    for Message in where.message:
+        message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
+
     tick(fps)
     updateDisplay()
 

@@ -3,7 +3,7 @@ from colors import *
 
 def loadRooms():
     rooms = {
-        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "chestRoom", "door5"]],
+        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "chestRoom", "door5"], ["start", "hallway", "DOOR"]],
         "start":{
             "name":"PUZZLE ROOM",
             "items":[
@@ -98,6 +98,16 @@ def loadRooms():
                         "whenDraw": 0,
                         "open": False,
                         "used": False
+                    }
+                },
+                {
+                    "DOOR":{
+                        "name":"Boss Door",
+                        "type":"door",
+                        "draw":[400, 20, 150, 40, red, "rect"],
+                        "whenDraw":0,
+                        "open":False,
+                        "used":False
                     }
                 }
             ],
@@ -253,7 +263,7 @@ def loadRooms():
             "light":True
         },
         "chestRoom":{
-            "name":"CHEST ROOM",
+            "name":"KEY ROOM",
             "items":[
                 {
                     "door5":{
@@ -264,9 +274,39 @@ def loadRooms():
                         "used":False,
                         "whenDraw":0
                     }
+                },
+                {
+                    "key":{
+                        "name":"Boss Door Key",
+                        "type":"item",
+                        "ability":"key",
+                        "unlocks":"DOOR",
+                        "weight":0,
+                        "draw":[400, 400, 25, orange, "squ"],
+                        "whenDraw":8
+                    }
                 }
             ],
-            "message":[["CONGRADJULATIONS!", yellow, 0, -50, 70, False], ["YOU DID IT!", yellow, 0, 50, 85, False]],
+            "message":[["BOSS DOOR KEY", yellow, 0, 100, 85, False]],
+            "npc":[],
+            "background":[],
+            "light":True
+        },
+        "hallway":{
+            "name":"HALLWAY OF DEATH",
+            "items":[
+                {
+                    "DOOR":{
+                        "name":"Boss Door",
+                        "type":"door",
+                        "draw":[400, 780, 150, 40, red, "rect"],
+                        "whenDraw":0,
+                        "open":False,
+                        "used":False
+                    }
+                }
+            ],
+            "message":[],
             "npc":[],
             "background":[],
             "light":True

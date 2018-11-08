@@ -3,7 +3,7 @@ from colors import *
 
 def loadRooms():
     rooms = {
-        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "chestRoom", "door5"], ["start", "hallway", "DOOR"]],
+        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "keyRoom", "door5"], ["start", "hallway", "DOOR"]],
         "start":{
             "name":"PUZZLE ROOM",
             "items":[
@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":False,
+                        "open":True,
                         "used":False
                     }
                 }
@@ -262,7 +262,7 @@ def loadRooms():
             "background":[],
             "light":True
         },
-        "chestRoom":{
+        "keyRoom":{
             "name":"KEY ROOM",
             "items":[
                 {
@@ -304,9 +304,17 @@ def loadRooms():
                         "open":False,
                         "used":False
                     }
+                },
+                {
+                    "yWall":{
+                        "name":"WALL",
+                        "type":"wall",
+                        "draw":[400, 500, 800, 25, yellow, "rect"],
+                        "whenDraw":0
+                    }
                 }
             ],
-            "message":[],
+            "message":[["UNDER CONSTRUCTION", yellow, 0, -100, 60, True]],
             "npc":[],
             "background":[],
             "light":True

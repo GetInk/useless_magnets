@@ -724,7 +724,7 @@ while True:
                                 if inDoor == "door1":
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
-                                        unlockedDoor = inDoor
+                                        unlockedDoor = door[inDoor]["name"]
                                         roomAnounce = where.roomKey
                 elif inPedistal == "pedistal3":
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
@@ -733,7 +733,7 @@ while True:
                                 if inDoor == "door2":
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
-                                        unlockedDoor = inDoor
+                                        unlockedDoor = door[inDoor]["name"]
                                         roomAnounce = where.roomKey
     #   FINAL ITEMPP
     if where.where == room["puzzleRoom"]:

@@ -71,6 +71,12 @@ nextFrame = clock()
 # DEFS
 def anounce(anouncement, color=white):
     renderAnounce(anouncement, color, 25, screenSizeX, screenSizeY)
+def contact(draw):
+    wallSize = [draw[2], draw[3]]
+    if current.x <= draw[0]+wallSize[0]/2+current.size[0]-10 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed-10 and current.y < draw[1]+wallSize[1]/2+current.size[1]+10 and current.x > draw[0]-wallSize[0]/2-current.size[0]+10:
+        return True
+    else:
+        return False
 # PC SIZE FINDER VARS
 doSquare = False
 squareWidth = 135

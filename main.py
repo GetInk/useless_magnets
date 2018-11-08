@@ -103,9 +103,11 @@ doors = []
 pickableItems = ["item", "pedistalBlock", "door"]
 anounceUnlocking = Timer()
 unlockedDoor = ""
+unlockedWith = ""
+roomAnounce = ""
 
-startSprite = me["butcher"]
 startRoom = room["start"]
+startSprite = me["butcher"]
 
 DOORS = room["doorConections"]
 setAutoUpdate(False)
@@ -688,12 +690,28 @@ while True:
         canMoveUp = True
         canMoveDown = True
     #   KEYS
-    for item in where.itemsR:
-        for inItem in item:
-            Item = item[inItem]
-            if Item["type"] == "item":
-                if Item["ability"] == "key":
-                    unlocks = Item["unlocks"]
+    for key in current.itemsB:
+        for inKey in key:
+            Key = key[inKey]
+            if Key["type"] == "item":
+                if Key["ability"] == "key":
+                    unlocks = Key["unlocks"]
+                    for door in where.itemsR:
+                        for inDoor in door:
+                            if inDoor == unlocks:
+                                Door = door[inDoor]
+                                draw = Door["draw"]
+                                doorSize = [draw[2], draw[3]]
+                                if current.x <= draw[0]+doorSize[0]/2+current.size[0] and current.y > draw[1]-doorSize[1]/2-current.size[1] and current.y < draw[1]+doorSize[1]/2+current.size[1] and current.x > draw[0]-doorSize[0]/2-current.size[0]:
+                                    if keyPressed("space"):
+                                        doTake = False
+                                        Door["open"] = True
+                                        unlockedDoor = Door["name"]
+                                        unlockedWith = Key["name"]
+                                        roomAnounce = where.roomKey
+                                        for delItem in range(0, len(current.itemsB)):
+                                            if current.itemsB[delItem] == key:
+                                                del current.itemsB[delItem]
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
@@ -707,6 +725,7 @@ while True:
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
                                         unlockedDoor = inDoor
+                                        roomAnounce = where.roomKey
                 elif inPedistal == "pedistal3":
                     if pedistal[inPedistal]["items"] == ["block1", "block2", "block3", "block4", "block5"]:
                         for door in where.itemsR:
@@ -715,6 +734,7 @@ while True:
                                     if door[inDoor]["open"] == False:
                                         door[inDoor]["open"] = True
                                         unlockedDoor = inDoor
+                                        roomAnounce = where.roomKey
     #   FINAL ITEMPP
     if where.where == room["puzzleRoom"]:
         for item in where.itemsR:
@@ -740,15 +760,22 @@ while True:
                     item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
     #   ANOUNCE DOOR UNLOCKING
     if unlockedDoor != "":
-        for item in where.itemsR:
-            for inItem in item:
-                if inItem == unlockedDoor:
-                    Item = item[inItem]
-                    if anounceUnlocking.count(75) == False:
-                        anounce("Unlocked %s" % Item["name"])
-                    else:
-                        anounceUnlocking.reset()
-                        unlockedDoor = ""
+        if roomAnounce == where.roomKey:
+            if unlockedWith == "":
+                if anounceUnlocking.count(75) == False:
+                    anounce("Unlocked %s" % unlockedDoor)
+                else:
+                    anounceUnlocking.reset()
+                    unlockedDoor = ""
+                    roomAnounce = ""
+            else:
+                if anounceUnlocking.count(75) == False:
+                    anounce("Unlocked %s with %s" % (unlockedDoor, unlockedWith))
+                else:
+                    anounceUnlocking.reset()
+                    unlockedDoor = ""
+                    unlockedWith = ""
+                    roomAnunce = ""
     tick(fps)
     updateDisplay()
 

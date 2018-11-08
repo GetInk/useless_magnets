@@ -543,7 +543,7 @@ def drawPolygon(pointlist, colour, linewidth=0):
         pygame.display.update(thisrect)
 
 
-def drawEllipse(centreX, centreY, width, height, colour, linewidth=0):
+def ellipse(centreX, centreY, width, height, colour, linewidth=0):
     global bgSurface
     colour = parseColour(colour)
     thisrect = pygame.Rect(centreX - width / 2, centreY - height / 2, width, height)

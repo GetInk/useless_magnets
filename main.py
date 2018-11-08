@@ -4,7 +4,7 @@ from rooms import *
 from sortingAlg import *
 from pygame_functions import *
 from colors import *
-import random
+from random import *
 
 class Current():
     def __init__(self, current):
@@ -754,6 +754,21 @@ while True:
                                     drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                 else:
                                     drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+    # DRAW DECOR ITEMS
+    if where.itemsR != []:
+        for item in where.itemsR:
+            for inItem in item:
+                Item = item[inItem]
+                draw = Item["draw"]
+                if Item["type"] == "decor":
+                    if Item["type2"] == "lava":
+                        lavaBubbles = Item["lavaBubbles"]
+                        if lavaBubbles == []:
+                            for Bubble in range(0, 10):
+                                lavaBubbles.append([randint(draw[0]-draw[2]/2,draw[0]+draw[2]/2), randint(draw[1]-draw[3]/2,draw[1]+draw[3]/2), randint(5, 30)])
+                        for Bubble in lavaBubbles:
+                            ellipse(Bubble[0], Bubble[1], Bubble[2], Bubble[2], red)
+                            Bubble[2] += 0.5
     # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
     if where.itemsR != []:
         for item in where.itemsR:

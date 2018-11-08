@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":False,
+                        "open":True,
                         "used":False
                     }
                 }
@@ -317,7 +317,9 @@ def loadRooms():
                     "lava":{
                         "name":"lava",
                         "type":"decor",
-                        "draw":[150, 400, 300, 800, red, "rect"],
+                        "type2":"lava",
+                        "lavaBubbles":[],
+                        "draw":[150, 400, 300, 800, bloodRed, "rect"],
                         "whenDraw":-1
                     }
                 },
@@ -325,7 +327,9 @@ def loadRooms():
                     "lava2":{
                         "name":"lava",
                         "type":"decor",
-                        "draw":[650, 400, 300, 800, red, "rect"],
+                        "type2":"lava",
+                        "lavaBubbles":[],
+                        "draw":[650, 400, 300, 800, bloodRed, "rect"],
                         "whenDraw":-1
                     }
                 }

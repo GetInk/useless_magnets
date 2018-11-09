@@ -711,7 +711,7 @@ while True:
                     unlockedWith = ""
                     roomAnunce = ""
     
-    # DRAW SQUARE
+    # DRAW ITEMS
     if where.itemsR != []:
         Sorted = []
         for item in where.itemsR:
@@ -734,6 +734,19 @@ while True:
                                     drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
                                 elif shape == "rect":
                                     drawRect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                if Item["type"] == "decor":
+                                    if Item["type2"] == "lava":
+                                        lavaBubbles = Item["lavaBubbles"]
+                                        if lavaBubbles == []:
+                                            for Bubble in range(0, 5):
+                                                lavaBubbles.append([randint(draw[0]-draw[2]/2+20,draw[0]+draw[2]/2-20), randint(draw[1]-draw[3]/2+20,draw[1]+draw[3]/2-20), randint(5, 25)])
+                                        for Bubble in lavaBubbles:
+                                            ellipse(Bubble[0], Bubble[1], Bubble[2], Bubble[2], red)
+                                            Bubble[2] += 1
+                                            if Bubble[2] >= randint(25, 40):
+                                                Bubble[0] = randint(draw[0]-draw[2]/2+20,draw[0]+draw[2]/2-20)
+                                                Bubble[1] = randint(draw[1]-draw[3]/2+20,draw[1]+draw[3]/2-20)
+                                                Bubble[2] = 0
                         elif Type == "pedistal":
                             if when == inSorted:
                                 pressure = Item["pressure"]
@@ -760,15 +773,6 @@ while True:
             for inItem in item:
                 Item = item[inItem]
                 draw = Item["draw"]
-                if Item["type"] == "decor":
-                    if Item["type2"] == "lava":
-                        lavaBubbles = Item["lavaBubbles"]
-                        if lavaBubbles == []:
-                            for Bubble in range(0, 10):
-                                lavaBubbles.append([randint(draw[0]-draw[2]/2,draw[0]+draw[2]/2), randint(draw[1]-draw[3]/2,draw[1]+draw[3]/2), randint(5, 30)])
-                        for Bubble in lavaBubbles:
-                            ellipse(Bubble[0], Bubble[1], Bubble[2], Bubble[2], red)
-                            Bubble[2] += 0.5
     # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
     if where.itemsR != []:
         for item in where.itemsR:

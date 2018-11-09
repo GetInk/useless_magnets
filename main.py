@@ -132,7 +132,7 @@ while True:
 
     # PC SIZE MESSURER
     if doSquare == True:
-        drawRect(current.x, current.y, squareWidth, squareHight, green)
+        rect(current.x, current.y, squareWidth, squareHight, green)
 
     if keyPressed("space") and doTake:
         if where.itemsR != {}:
@@ -731,9 +731,9 @@ while True:
                         if Type != "pedistal" and Type != "PP" and Type != "itemPP":
                             if when == inSorted:
                                 if shape == "squ":
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
                                 elif shape == "rect":
-                                    drawRect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                                 if Item["type"] == "decor":
                                     if Item["type2"] == "lava":
                                         lavaBubbles = Item["lavaBubbles"]
@@ -742,7 +742,7 @@ while True:
                                                 lavaBubbles.append([randint(draw[0]-draw[2]/2+20,draw[0]+draw[2]/2-20), randint(draw[1]-draw[3]/2+20,draw[1]+draw[3]/2-20), randint(5, 25)])
                                         for Bubble in lavaBubbles:
                                             ellipse(Bubble[0], Bubble[1], Bubble[2], Bubble[2], red)
-                                            Bubble[2] += 1
+                                            Bubble[2] += 0.5
                                             if Bubble[2] >= randint(25, 40):
                                                 Bubble[0] = randint(draw[0]-draw[2]/2+20,draw[0]+draw[2]/2-20)
                                                 Bubble[1] = randint(draw[1]-draw[3]/2+20,draw[1]+draw[3]/2-20)
@@ -753,26 +753,20 @@ while True:
                                 if pressure == True:
                                     pressed = Item["pressed"]
                                     if pressed == False:
-                                        drawRect(draw[0], draw[1], draw[2], draw[2], gray)
-                                        drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                        rect(draw[0], draw[1], draw[2], draw[2], gray)
+                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                     else:
-                                        drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                        rect(draw[0], draw[1], draw[2], draw[2], draw[3])
                                 else:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
                         elif Type == "PP" or Type == "itemPP":
                             if when == inSorted:
                                 pressed = Item["pressed"]
                                 if pressed == False:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], gray)
-                                    drawRect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[2], gray)
+                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                 else:
-                                    drawRect(draw[0], draw[1], draw[2], draw[2], draw[3])
-    # DRAW DECOR ITEMS
-    if where.itemsR != []:
-        for item in where.itemsR:
-            for inItem in item:
-                Item = item[inItem]
-                draw = Item["draw"]
+                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
     # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
     if where.itemsR != []:
         for item in where.itemsR:
@@ -803,6 +797,8 @@ while True:
     # DO ROOM MESSAGES
     for Message in where.message:
         message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
+
+    drawHeart(400, 400, 30, red)
 
     tick(fps)
     updateDisplay()

@@ -519,7 +519,7 @@ def pause(milliseconds, allowEsc=True):
         current_time = pygame.time.get_ticks()
 
 
-def drawRect(xpos, ypos, width, height, colour, linewidth=0):
+def rect(xpos, ypos, width, height, colour, linewidth=0):
     global bgSurface
     colour = parseColour(colour)
     thisrect = pygame.draw.rect(screen, colour, [xpos-width/2, ypos-height/2, width, height], linewidth)
@@ -558,6 +558,13 @@ def drawTriangle(x1, y1, x2, y2, x3, y3, colour, linewidth=0):
     thisrect = pygame.draw.polygon(screen, colour, [(x1, y1), (x2, y2), (x3, y3)], linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
+
+
+def drawHeart(centreX, centreY, size, colour):
+    ellipse(centreX-(11.0/30.0)*size, centreY-(4.0/30.0)*size, size, size, colour)
+    ellipse(centreX+(11.0/30.0)*size, centreY-(4.0/30.0)*size, size, size, colour)
+    drawTriangle(centreX-(21.5/30.0)*size, centreY+(6.7/30.0)*size, centreX+(21.5/30.0)*size, centreY+(6.7/30.0)*size, centreX, centreY+(26.0/30.0)*size, colour)
+    ellipse(centreX, centreY+(6.5/30)*size, (5/30.0)*size, (5/30.0)*size, colour)
 
 
 def clearShapes():

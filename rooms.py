@@ -306,14 +306,6 @@ def loadRooms():
                     }
                 },
                 {
-                    "yWall":{
-                        "name":"WALL",
-                        "type":"wall",
-                        "draw":[400, 500, 800, 25, yellow, "rect"],
-                        "whenDraw":0
-                    }
-                },
-                {
                     "lava":{
                         "name":"lava",
                         "type":"decor",
@@ -332,9 +324,19 @@ def loadRooms():
                         "draw":[650, 400, 300, 800, bloodRed, "rect"],
                         "whenDraw":-1
                     }
+                },
+                {
+                    "projectile":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"left",
+                        "speed":10,
+                        "draw":[800, 400, 100, 100, white, "rect"],
+                        "whenDraw":100
+                    }
                 }
             ],
-            "message":[["UNDER CONSTRUCTION", yellow, 0, -150, 60, True], ["KEEP OUT", yellow, 0, -50, 60, True]],
+            "message":[["UNDER CONSTRUCTION", yellow, 0, -50, 60, True], ["KEEP OUT", yellow, 0, 50, 60, True]],
             "npc":[],
             "background":[],
             "light":True

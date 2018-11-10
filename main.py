@@ -798,7 +798,23 @@ while True:
     for Message in where.message:
         message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
 
-    drawHeart(400, 400, 30, red)
+
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            Type = Item["type"]
+            if Item["type"] == "projectile":
+                draw = Item["draw"]
+                speed = Item["speed"]
+                direction = Item["direction"]
+                if direction == "left":
+                    draw[0] -= speed
+                elif direction == "right":
+                    draw[0] += speed
+                elif direction == "up":
+                    draw[1] -= speed
+                elif direction == "down":
+                    draw[1] += speed
 
     tick(fps)
     updateDisplay()

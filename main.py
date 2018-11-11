@@ -678,25 +678,29 @@ while True:
                     draw[1] += speed
     for item in where.itemsR:
         for inItem in item:
-            item = item[inItem]
+            Item = item[inItem]
             if Item["type"] == "projectile":
                 draw = Item["draw"]
                 wallSize = [draw[2], draw[3]]
                 if current.x <= draw[0]+wallSize[0]/2+current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5:
                     current.x = draw[0]+wallSize[0]/2+current.size[0]
                     movingLeft = False
+                    wallLeft = False
                     hitByProjectile = [True, Item["direction"]]
                 if current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5:
                     current.x = draw[0]-wallSize[0]/2-current.size[0]
                     movingRight = False
+                    wallRight = False
                     hitByProjectile = [True, Item["direction"]]
                 if current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
                     current.y = draw[1]+wallSize[1]/2+current.size[1]
                     movingUp = False
+                    wallUp = False
                     hitByProjectile = [True, Item["direction"]]
                 if current.y >= draw[1]-wallSize[1]/2-current.size[1] and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5:
                     current.y = draw[1]-wallSize[1]/2-current.size[1]
                     movingDown = False
+                    wallDown = False
                     hitByProjectile = [True, Item["direction"]]
 
     # EVENTS:

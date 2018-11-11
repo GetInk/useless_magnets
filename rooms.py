@@ -3,7 +3,7 @@ from colors import *
 
 def loadRooms():
     rooms = {
-        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "keyRoom", "door5"], ["start", "hallway", "DOOR"]],
+        "doorConections":[["start", "room1", "door1"], ["start", "room2", "door2"], ["room1", "puzzleRoom", "door3"], ["room2", "puzzleRoom", "door4"], ["puzzleRoom", "keyRoom", "door5"], ["start", "hallway", "DOOR"], ["hallway", "finalRoom", "finalDoor"]],
         "start":{
             "name":"PUZZLE ROOM",
             "items":[
@@ -293,7 +293,7 @@ def loadRooms():
             "light":True
         },
         "hallway":{
-            "name":"HALLWAY OF DEATH",
+            "name":"HALLWAY OF DOOM",
             "items":[
                 {
                     "DOOR":{
@@ -326,12 +326,12 @@ def loadRooms():
                     }
                 },
                 {
-                    "projectile":{
+                    "projectile1":{
                         "name":"rock",
                         "type":"projectile",
                         "direction":"left",
-                        "speed":20,
-                        "draw":[800, 400, 100, 20, white, "rect"],
+                        "speed":15,
+                        "draw":[800, 500, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -344,9 +344,98 @@ def loadRooms():
                         "draw":[0, 150, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
+                },
+                {
+                    "projectile3":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"right",
+                        "speed":15,
+                        "draw":[0, 700, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile4":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"left",
+                        "speed":15,
+                        "draw":[300, 300, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile5":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"right",
+                        "speed":15,
+                        "draw":[550, 600, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile6":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"left",
+                        "speed":15,
+                        "draw":[200, 75, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile7":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"left",
+                        "speed":15,
+                        "draw":[500, 400, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile8":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"left",
+                        "speed":15,
+                        "draw":[600, 100, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "finalDoor":{
+                        "name":"FINAL DOOR",
+                        "type":"door",
+                        "draw":[400, 15, 105, 30, green, "rect"],
+                        "open":True,
+                        "used":False,
+                        "whenDraw":0
+                    }
                 }
             ],
             "message":[["UNDER CONSTRUCTION", yellow, 0, -50, 60, True], ["KEEP OUT", yellow, 0, 50, 60, True]],
+            "npc":[],
+            "background":[],
+            "light":True
+        },
+        "finalRoom":{
+            "name":"FINAL ROOM",
+            "items":[
+                {
+                    "finalDoor":{
+                        "name":"FINAL DOOR",
+                        "type":"door",
+                        "draw":[400, 785, 105, 30, green, "rect"],
+                        "open":True,
+                        "used":False,
+                        "whenDraw":0
+                    }
+                }
+            ],
+            "message":[["CONGRADJULATIONS!", yellow, 0, -50, 60, True], ["U DID IT!", yellow, 0, 50, 65, True]],
             "npc":[],
             "background":[],
             "light":True

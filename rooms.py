@@ -330,8 +330,18 @@ def loadRooms():
                         "name":"rock",
                         "type":"projectile",
                         "direction":"left",
-                        "speed":10,
-                        "draw":[800, 400, 100, 100, white, "rect"],
+                        "speed":20,
+                        "draw":[800, 400, 100, 20, white, "rect"],
+                        "whenDraw":100
+                    }
+                },
+                {
+                    "projectile2":{
+                        "name":"rock",
+                        "type":"projectile",
+                        "direction":"right",
+                        "speed":15,
+                        "draw":[0, 150, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 }

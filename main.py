@@ -27,6 +27,8 @@ class Current():
         self.itemsE = self.itemsM["equiped"]
         self.itemsB = self.itemsM["backpack"]
         self.size = self.current["size"]
+        self.HP = self.current["HP"]
+        self.maxHP = self.current["maxHP"]
 class Where():
     def __init__(self, where):
         self.where = where
@@ -95,7 +97,7 @@ shiftRest = 0
 shiftAdd = 0
 holdingPB = False
 standAnimationStart = False
-hitEdge = False
+canMove = True
 canMoveRight = True
 canMoveLeft = True
 canMoveUp = True
@@ -104,17 +106,28 @@ wallRight = True
 wallLeft = True
 wallUp = True
 wallDown = True
+movingRight = False
+movingLeft = False
+movingUp = False
+movingDown = False
+movementMod = [0, 0, 0, 0]
 nearestItem = []
 doors = []
 pickableItems = ["item", "pedistalBlock", "door"]
 anounceUnlocking = Timer()
+anounceDeath = Timer()
+damageTimer = Timer()
 unlockedDoor = ""
 unlockedWith = ""
 roomAnounce = ""
+hitByProjectile = [False, ""]
+died = False
+diedBC = ""
 
 startRoom = room["start"]
 startSprite = me["butcher"]
 
+lastRoom = startRoom
 DOORS = room["doorConections"]
 setAutoUpdate(False)
 current = Current(startSprite)
@@ -210,6 +223,7 @@ while True:
                             for inItem in takeItem:
                                 for door in doors:
                                     if inItem == door.conector:
+                                        lastRoom = where
                                         where = door.use(where)
                             for item in takeItem:
                                 for items in where.itemsR:
@@ -333,7 +347,7 @@ while True:
             changeSpriteImageNoSmoothing(current.sprite, current.image)
             transformSpriteNoSmoothing(current.sprite, 0, scaleSize)
             nextFrame = clock() + current.current["animationSpeed"]
-        current.x += current.speed
+        movingRight = True
         moveSprite(current.sprite, current.x, current.y, True)
         standAnimationStart = False
     elif keyPressed("left") and canMoveLeft and wallLeft:
@@ -351,7 +365,7 @@ while True:
             changeSpriteImageNoSmoothing(current.sprite, current.image)
             transformSpriteNoSmoothing(current.sprite, 0, scaleSize)
             nextFrame = clock() + current.current["animationSpeed"]
-        current.x -= current.speed
+        movingLeft = True
         moveSprite(current.sprite, current.x, current.y, True)
         standAnimationStart = False
     elif keyPressed("up") and canMoveUp and wallUp:
@@ -369,7 +383,7 @@ while True:
             changeSpriteImageNoSmoothing(current.sprite, current.image)
             transformSpriteNoSmoothing(current.sprite, 0, scaleSize)
             nextFrame = clock() + current.current["animationSpeed"]
-        current.y -= current.speed
+        movingUp = True
         moveSprite(current.sprite, current.x, current.y, True)
         standAnimationStart = False
     elif keyPressed("down") and canMoveDown and wallDown:
@@ -387,7 +401,7 @@ while True:
             changeSpriteImageNoSmoothing(current.sprite, current.image)
             transformSpriteNoSmoothing(current.sprite, 0, scaleSize)
             nextFrame = clock() + current.current["animationSpeed"]
-        current.y += current.speed
+        movingDown = True
         moveSprite(current.sprite, current.x, current.y, True)
         standAnimationStart = False
     elif current.looking == "right":
@@ -475,7 +489,7 @@ while True:
             nextFrame = clock() + current.current["animationSpeed"]
         moveSprite(current.sprite, current.x, current.y, True)
 
-    #   WALK OF SCREEN
+    # WALK OF SCREEN
     if current.x < 0 - scaleSize*10:
         current.x = screenSizeX + scaleSize*10
     elif current.x > screenSizeX + scaleSize*10:
@@ -645,7 +659,46 @@ while True:
                                         for delItem in range(0, len(current.itemsB)):
                                             if current.itemsB[delItem] == key:
                                                 del current.itemsB[delItem]
-    
+    #   PROJECTILES
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            Type = Item["type"]
+            if Item["type"] == "projectile":
+                draw = Item["draw"]
+                speed = Item["speed"]
+                direction = Item["direction"]
+                if direction == "left":
+                    draw[0] -= speed
+                elif direction == "right":
+                    draw[0] += speed
+                elif direction == "up":
+                    draw[1] -= speed
+                elif direction == "down":
+                    draw[1] += speed
+    for item in where.itemsR:
+        for inItem in item:
+            item = item[inItem]
+            if Item["type"] == "projectile":
+                draw = Item["draw"]
+                wallSize = [draw[2], draw[3]]
+                if current.x <= draw[0]+wallSize[0]/2+current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5:
+                    current.x = draw[0]+wallSize[0]/2+current.size[0]
+                    movingLeft = False
+                    hitByProjectile = [True, Item["direction"]]
+                if current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5:
+                    current.x = draw[0]-wallSize[0]/2-current.size[0]
+                    movingRight = False
+                    hitByProjectile = [True, Item["direction"]]
+                if current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
+                    current.y = draw[1]+wallSize[1]/2+current.size[1]
+                    movingUp = False
+                    hitByProjectile = [True, Item["direction"]]
+                if current.y >= draw[1]-wallSize[1]/2-current.size[1] and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5:
+                    current.y = draw[1]-wallSize[1]/2-current.size[1]
+                    movingDown = False
+                    hitByProjectile = [True, Item["direction"]]
+
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
@@ -684,15 +737,8 @@ while True:
                             for inItem2 in item2:
                                 if inItem2 == "wall1" or inItem2 == "wall2":
                                     item2[inItem2]["type"] = "wall"
-    #   CHANGE DOOR COLOR
-    for item in where.itemsR:
-        for inItem in item:
-            if item[inItem]["type"] == "door":
-                if item[inItem]["open"] == True:
-                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = green
-                else:
-                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
-    #   ANOUNCE DOOR UNLOCKING
+    
+    # ANOUNCE DOOR UNLOCKING
     if unlockedDoor != "":
         if roomAnounce == where.roomKey:
             if unlockedWith == "":
@@ -710,7 +756,11 @@ while True:
                     unlockedDoor = ""
                     unlockedWith = ""
                     roomAnunce = ""
-    
+    # CANMOVE
+    if canMoveRight == False or canMoveLeft == False or canMoveUp == False or canMoveDown == False or wallRight == False or wallLeft == False or wallUp == False or wallDown == False:
+        canMove = False
+    else:
+        canMove = True
     # DRAW ITEMS
     if where.itemsR != []:
         Sorted = []
@@ -767,6 +817,11 @@ while True:
                                     rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                 else:
                                     rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+    # DRAW HEARTS
+    for draw in range(0, current.maxHP):
+        drawHeart(33+draw*55, 765, 30, red)
+    for draw in range(0, current.maxHP-current.HP):
+        drawHeart((33+(current.maxHP-1)*55)-draw*55, 765, 25, black)
     # CREATING PEDISTAL AND PRESSURE PLATE PRESSURE
     if where.itemsR != []:
         for item in where.itemsR:
@@ -797,24 +852,105 @@ while True:
     # DO ROOM MESSAGES
     for Message in where.message:
         message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
-
-
+    # MOVEMENT
+    if movingRight:
+        current.x += current.speed+movementMod[0]
+    if movingLeft:
+        current.x -= current.speed+movementMod[1]
+    if movingUp:
+        current.y -= current.speed+movementMod[2]
+    if movingDown:
+        current.y += current.speed+movementMod[3]
+    # SQUASHED BY PROJECTILE
+    if hitByProjectile[0]:
+        if hitByProjectile[1] == "right" and (wallRight == False or canMoveRight == False):
+            died = True
+            where = lastRoom
+            current.HP = current.maxHP
+            current.x = 400
+            current.y = 400
+            diedBC = "BEING SQUASHED"
+        elif hitByProjectile[1] == "left" and (wallLeft == False or canMoveLeft == False):
+            died = True
+            where = lastRoom
+            current.HP = current.maxHP
+            current.x = 400
+            current.y = 400
+            diedBC = "BEING SQUASHED"
+        elif hitByProjectile[1] == "up" and (wallUp == False or canMoveUp == False):
+            died = True
+            where = lastRoom
+            current.HP = current.maxHP
+            current.x = 400
+            current.y = 400
+            diedBC = "BEING SQUASHED"
+        elif hitByProjectile[1] == "down" and (wallDown == False or canMoveDown == False):
+            died = True
+            where = lastRoom
+            current.HP = current.maxHP
+            current.x = 400
+            current.y = 400
+            diedBC = "BEING SQUASHED"
+    # ANOUNCE DEATH
+    if died == True:
+        if anounceDeath.count(50) == False:
+            anounce("YOU DIED FROM %s" % diedBC)
+        else:
+            died = False
+            diedBC = ""
+            anounceDeath.reset()
+        #   CHANGE DOOR COLOR
+    # CHANGE DOOR COLOR
+    for item in where.itemsR:
+        for inItem in item:
+            if item[inItem]["type"] == "door":
+                if item[inItem]["open"] == True:
+                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = green
+                else:
+                    item[inItem]["draw"][len(item[inItem]["draw"])-2] = red
+    # BURN IN LAVA
     for item in where.itemsR:
         for inItem in item:
             Item = item[inItem]
-            Type = Item["type"]
+            if Item["type"] == "decor":
+                if Item["type2"] == "lava":
+                    draw = Item["draw"]
+                    if contact(draw):
+                        if damageTimer.count(7):
+                            current.HP -= 1
+                            damageTimer.reset()
+                            if current.HP >= 0:
+                                diedBC = "BURNING ALIVE IN LAVA"
+    # DIE FROM DAMAGE
+    if current.HP <= 0:
+        died = True
+        current.HP = current.maxHP
+        where = lastRoom
+        current.x = 400
+        current.y = 400
+    # REAPEARING PROJECTILES
+    for item in where.itemsR:
+        for inItem in item:
+            Item = item[inItem]
+            draw = Item["draw"]
             if Item["type"] == "projectile":
-                draw = Item["draw"]
-                speed = Item["speed"]
-                direction = Item["direction"]
-                if direction == "left":
-                    draw[0] -= speed
-                elif direction == "right":
-                    draw[0] += speed
-                elif direction == "up":
-                    draw[1] -= speed
-                elif direction == "down":
-                    draw[1] += speed
+                if draw[0] < 0-draw[2]-25:
+                    draw[0] = 800+draw[2]+25
+                elif draw[0] > 800+draw[2]+25:
+                    draw[0] = 0-draw[2]-25
+                elif draw[1] < 0-draw[3]-25:
+                    draw[1] = 800+draw[3]+25
+                elif draw[1] > 800+draw[3]+25:
+                    draw[1] = 0-draw[3]-25
+
+    # RESETING VARS
+    movementMod = [0, 0, 0, 0]
+    hitByProjectile = [False, ""]
+    movingRight = False
+    movingLeft = False
+    movingUp = False
+    movingDown = False
+    canMove = True
 
     tick(fps)
     updateDisplay()

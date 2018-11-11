@@ -30,7 +30,8 @@ def loadMe():
                 "backpack":[],
                 "equiped":[]
             },
-            "HP":0,
+            "HP":10,
+            "maxHP":10,
             "sprite": loadButcher(),
             "X": 400,
             "Y": 400,

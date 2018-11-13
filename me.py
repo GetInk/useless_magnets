@@ -5,26 +5,11 @@ def loadMe():
         "butcher": {
             "name":"Butcher",
             "stats": {
-                "str":{
-                    "name":"Str",
-                    "count":0
-                },
-                "dex":{
-                    "name":"Dex",
-                    "count":0
-                },
-                "int":{
-                    "name":"Int",
-                    "count":0
-                },
-                "wis":{
-                    "name":"Wis",
-                    "count":0
-                },
-                "cha":{
-                    "name":"Cha",
-                    "count":0
-                }
+                "str":0,
+                "dex":0,
+                "int":0,
+                "wis":0,
+                "cha":0
             },
             "items":{
                 "backpack":[],

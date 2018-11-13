@@ -386,7 +386,7 @@ def loadRooms():
                     }
                 }
             ],
-            "message":[["UNDER CONSTRUCTION", yellow, 0, -50, 60, True], ["KEEP OUT", yellow, 0, 50, 60, True]],
+            "message":[],
             "npc":[],
             "background":[],
             "light":True

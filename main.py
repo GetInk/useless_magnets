@@ -113,7 +113,7 @@ movingDown = False
 movementMod = [0, 0, 0, 0]
 nearestItem = []
 doors = []
-pickableItems = ["item", "pedistalBlock", "door"]
+pickableItems = ["item", "pedistalBlock", "door", "heal"]
 anounceUnlocking = Timer()
 anounceDeath = Timer()
 damageTimer = Timer()
@@ -207,10 +207,24 @@ while True:
                                                             pedistalItem.remove(INITEM)
                                             else:
                                                 pedistalItem.remove(inTaken)
-                if isItem != "door":
+                if isItem != "door" and isItem != "heal":
                     doTake = False
                     current.holding += weight
                     current.itemsB.append(takeItem)
+                    for inItemsR in range(0, len(where.itemsR)):
+                        if takeItem == where.itemsR[inItemsR]:
+                            del where.itemsR[inItemsR]
+                            break
+                elif isItem == "heal":
+                    doTake = False
+                    for item in takeItem:
+                        if takeItem[item]["heals"] == "max":
+                            current.HP = current.maxHP
+                        else:
+                            if current.HP+takeItem[item]["heals"] > current.maxHP:
+                                current.HP = current.maxHP
+                            else:
+                                current.HP += takeItem[item]["heals"]
                     for inItemsR in range(0, len(where.itemsR)):
                         if takeItem == where.itemsR[inItemsR]:
                             del where.itemsR[inItemsR]
@@ -792,10 +806,12 @@ while True:
                     if Type != "untuchable":
                         if Type != "pedistal" and Type != "PP" and Type != "itemPP":
                             if when == inSorted:
-                                if shape == "squ":
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
-                                elif shape == "rect":
+                                if shape == "rect":
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                elif shape == "ellipse":
+                                    ellipse(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                elif shape == "heart":
+                                    drawHeart(draw[0], draw[1], draw[2], draw[3])
                                 if Item["type"] == "decor":
                                     if Item["type2"] == "lava":
                                         lavaBubbles = Item["lavaBubbles"]
@@ -816,19 +832,19 @@ while True:
                                     pressed = Item["pressed"]
                                     if pressed == False:
                                         rect(draw[0], draw[1], draw[2], draw[2], gray)
-                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                     else:
-                                        rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                        rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                         elif Type == "PP" or Type == "itemPP":
                             if when == inSorted:
                                 pressed = Item["pressed"]
                                 if pressed == False:
-                                    rect(draw[0], draw[1], draw[2], draw[2], gray)
-                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[3], draw[4], gray)
+                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
     # DRAW HEARTS
     for draw in range(0, current.maxHP):
         drawHeart(33+draw*55, 765, 30, red)

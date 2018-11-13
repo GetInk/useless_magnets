@@ -218,19 +218,20 @@ while True:
                 else:
                     for item in takeItem:
                         if takeItem[item]["open"] == True:
-                            doTake = False
-                            takeItem[item]["used"] = True
-                            for inItem in takeItem:
-                                for door in doors:
-                                    if inItem == door.conector:
-                                        lastRoom = where
-                                        where = door.use(where)
-                            for item in takeItem:
-                                for items in where.itemsR:
-                                    for inItem in items:
-                                        if inItem == item:
-                                            current.x = items[inItem]["draw"][0]
-                                            current.y = items[inItem]["draw"][1]
+                            if contact(takeItem[item]["draw"]):
+                                doTake = False
+                                takeItem[item]["used"] = True
+                                for inItem in takeItem:
+                                    for door in doors:
+                                        if inItem == door.conector:
+                                            lastRoom = where
+                                            where = door.use(where)
+                                for item in takeItem:
+                                    for items in where.itemsR:
+                                        for inItem in items:
+                                            if inItem == item:
+                                                current.x = items[inItem]["draw"][0]
+                                                current.y = items[inItem]["draw"][1]
         nearestItem = []
         takeItem = []
     if keyPressed("lshift") and doDrop:

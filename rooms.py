@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":False,
+                        "open":True,
                         "used":False
                     }
                 }
@@ -329,9 +329,9 @@ def loadRooms():
                     "projectile1":{
                         "name":"rock",
                         "type":"projectile",
-                        "direction":"left",
+                        "direction":"down",
                         "speed":15,
-                        "draw":[800, 500, 100, 20, white, "rect"],
+                        "draw":[150, 600, 20, 100, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -339,9 +339,9 @@ def loadRooms():
                     "projectile2":{
                         "name":"rock",
                         "type":"projectile",
-                        "direction":"right",
+                        "direction":"down",
                         "speed":15,
-                        "draw":[0, 150, 100, 20, white, "rect"],
+                        "draw":[650, 600, 20, 100, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -349,9 +349,9 @@ def loadRooms():
                     "projectile3":{
                         "name":"rock",
                         "type":"projectile",
-                        "direction":"right",
+                        "direction":"left",
                         "speed":15,
-                        "draw":[0, 700, 100, 20, white, "rect"],
+                        "draw":[700, 500, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -361,7 +361,7 @@ def loadRooms():
                         "type":"projectile",
                         "direction":"left",
                         "speed":15,
-                        "draw":[300, 300, 100, 20, white, "rect"],
+                        "draw":[600, 250, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -371,7 +371,7 @@ def loadRooms():
                         "type":"projectile",
                         "direction":"right",
                         "speed":15,
-                        "draw":[550, 600, 100, 20, white, "rect"],
+                        "draw":[475, 150, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },
@@ -379,29 +379,9 @@ def loadRooms():
                     "projectile6":{
                         "name":"rock",
                         "type":"projectile",
-                        "direction":"left",
+                        "direction":"right",
                         "speed":15,
-                        "draw":[200, 75, 100, 20, white, "rect"],
-                        "whenDraw":100
-                    }
-                },
-                {
-                    "projectile7":{
-                        "name":"rock",
-                        "type":"projectile",
-                        "direction":"left",
-                        "speed":15,
-                        "draw":[500, 400, 100, 20, white, "rect"],
-                        "whenDraw":100
-                    }
-                },
-                {
-                    "projectile8":{
-                        "name":"rock",
-                        "type":"projectile",
-                        "direction":"left",
-                        "speed":15,
-                        "draw":[600, 100, 100, 20, white, "rect"],
+                        "draw":[800, 400, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },

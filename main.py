@@ -120,7 +120,7 @@ damageTimer = Timer()
 unlockedDoor = ""
 unlockedWith = ""
 roomAnounce = ""
-hitByProjectile = [False, ""]
+hitByProjectile = [False, "", 0]
 died = False
 diedBC = ""
 
@@ -521,7 +521,7 @@ while True:
         current.y = screenSizeX-current.size[1]
     else:
         wallDown = True
-  
+
     #   TAKE AND DROP DELAY
     if doTake == False:
         spaceAdd = 1
@@ -687,27 +687,30 @@ while True:
                     current.x = draw[0]+wallSize[0]/2+current.size[0]
                     movingLeft = False
                     wallLeft = False
-                    if Item["direction"] == "left":
-                        hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "right":
+                        hitByProjectile[0] = True
+                        hitByProjectile[1] = Item["direction"]
                 if current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5:
                     current.x = draw[0]-wallSize[0]/2-current.size[0]
                     movingRight = False
                     wallRight = False
-                    if Item["direction"] == "right":
-                        hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "left":
+                        hitByProjectile[0] = True
+                        hitByProjectile[1] = Item["direction"]
                 if current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
                     current.y = draw[1]+wallSize[1]/2+current.size[1]
                     movingUp = False
                     wallUp = False
-                    if Item["direction"] == "up":
-                        hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "down":
+                        hitByProjectile[0] = True
+                        hitByProjectile[1] = Item["direction"]
                 if current.y >= draw[1]-wallSize[1]/2-current.size[1] and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5:
                     current.y = draw[1]-wallSize[1]/2-current.size[1]
                     movingDown = False
                     wallDown = False
-                    if Item["direction"] == "down":
-                        hitByProjectile = [True, Item["direction"]]
-
+                    if Item["direction"] == "up":
+                        hitByProjectile[0] = True
+                        hitByProjectile[1] = Item["direction"]
     # EVENTS:
     #   OPENING DOORS
     if where.where == room["start"]:
@@ -953,8 +956,12 @@ while True:
                     draw[1] = 0-draw[3]-25
 
     # RESETING VARS
+    if hitByProjectile[0] == True:
+        if hitByProjectile[2] <= 2:
+            hitByProjectile[2] += 1
+        else:
+            hitByProjectile = [False, "", 0]
     movementMod = [0, 0, 0, 0]
-    hitByProjectile = [False, ""]
     movingRight = False
     movingLeft = False
     movingUp = False

@@ -687,22 +687,26 @@ while True:
                     current.x = draw[0]+wallSize[0]/2+current.size[0]
                     movingLeft = False
                     wallLeft = False
-                    hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "left":
+                        hitByProjectile = [True, Item["direction"]]
                 if current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5:
                     current.x = draw[0]-wallSize[0]/2-current.size[0]
                     movingRight = False
                     wallRight = False
-                    hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "right":
+                        hitByProjectile = [True, Item["direction"]]
                 if current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
                     current.y = draw[1]+wallSize[1]/2+current.size[1]
                     movingUp = False
                     wallUp = False
-                    hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "up":
+                        hitByProjectile = [True, Item["direction"]]
                 if current.y >= draw[1]-wallSize[1]/2-current.size[1] and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5:
                     current.y = draw[1]-wallSize[1]/2-current.size[1]
                     movingDown = False
                     wallDown = False
-                    hitByProjectile = [True, Item["direction"]]
+                    if Item["direction"] == "down":
+                        hitByProjectile = [True, Item["direction"]]
 
     # EVENTS:
     #   OPENING DOORS

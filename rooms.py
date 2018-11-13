@@ -331,22 +331,12 @@ def loadRooms():
                         "type":"projectile",
                         "direction":"down",
                         "speed":15,
-                        "draw":[150, 600, 20, 100, white, "rect"],
+                        "draw":[650, 500, 20, 100, white, "rect"],
                         "whenDraw":100
                     }
                 },
                 {
                     "projectile2":{
-                        "name":"rock",
-                        "type":"projectile",
-                        "direction":"down",
-                        "speed":15,
-                        "draw":[650, 600, 20, 100, white, "rect"],
-                        "whenDraw":100
-                    }
-                },
-                {
-                    "projectile3":{
                         "name":"rock",
                         "type":"projectile",
                         "direction":"left",
@@ -356,7 +346,7 @@ def loadRooms():
                     }
                 },
                 {
-                    "projectile4":{
+                    "projectile3":{
                         "name":"rock",
                         "type":"projectile",
                         "direction":"left",
@@ -366,17 +356,17 @@ def loadRooms():
                     }
                 },
                 {
-                    "projectile5":{
+                    "projectile4":{
                         "name":"rock",
                         "type":"projectile",
                         "direction":"right",
                         "speed":15,
-                        "draw":[475, 150, 100, 20, white, "rect"],
+                        "draw":[400, 150, 100, 20, white, "rect"],
                         "whenDraw":100
                     }
                 },
                 {
-                    "projectile6":{
+                    "projectile5":{
                         "name":"rock",
                         "type":"projectile",
                         "direction":"right",
@@ -409,7 +399,7 @@ def loadRooms():
                         "name":"FINAL DOOR",
                         "type":"door",
                         "draw":[400, 785, 105, 30, green, "rect"],
-                        "open":True,
+                        "open":False,
                         "used":False,
                         "whenDraw":0
                     }

@@ -113,7 +113,7 @@ movingDown = False
 movementMod = [0, 0, 0, 0]
 nearestItem = []
 doors = []
-pickableItems = ["item", "pedistalBlock", "door", "heal"]
+pickableItems = ["item", "pedistalBlock", "door"]
 anounceUnlocking = Timer()
 anounceDeath = Timer()
 damageTimer = Timer()
@@ -207,24 +207,10 @@ while True:
                                                             pedistalItem.remove(INITEM)
                                             else:
                                                 pedistalItem.remove(inTaken)
-                if isItem != "door" and isItem != "heal":
+                if isItem != "door":
                     doTake = False
                     current.holding += weight
                     current.itemsB.append(takeItem)
-                    for inItemsR in range(0, len(where.itemsR)):
-                        if takeItem == where.itemsR[inItemsR]:
-                            del where.itemsR[inItemsR]
-                            break
-                elif isItem == "heal":
-                    doTake = False
-                    for item in takeItem:
-                        if takeItem[item]["heals"] == "max":
-                            current.HP = current.maxHP
-                        else:
-                            if current.HP+takeItem[item]["heals"] > current.maxHP:
-                                current.HP = current.maxHP
-                            else:
-                                current.HP += takeItem[item]["heals"]
                     for inItemsR in range(0, len(where.itemsR)):
                         if takeItem == where.itemsR[inItemsR]:
                             del where.itemsR[inItemsR]
@@ -808,10 +794,6 @@ while True:
                             if when == inSorted:
                                 if shape == "rect":
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
-                                elif shape == "ellipse":
-                                    ellipse(draw[0], draw[1], draw[2], draw[3], draw[4])
-                                elif shape == "heart":
-                                    drawHeart(draw[0], draw[1], draw[2], draw[3])
                                 if Item["type"] == "decor":
                                     if Item["type2"] == "lava":
                                         lavaBubbles = Item["lavaBubbles"]
@@ -831,20 +813,20 @@ while True:
                                 if pressure == True:
                                     pressed = Item["pressed"]
                                     if pressed == False:
-                                        rect(draw[0], draw[1], draw[2], draw[3], gray)
-                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
+                                        rect(draw[0], draw[1], draw[2], draw[2], gray)
+                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                     else:
-                                        rect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                        rect(draw[0], draw[1], draw[2], draw[2], draw[3])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
                         elif Type == "PP" or Type == "itemPP":
                             if when == inSorted:
                                 pressed = Item["pressed"]
                                 if pressed == False:
-                                    rect(draw[0], draw[1], draw[2], draw[3], gray)
-                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
+                                    rect(draw[0], draw[1], draw[2], draw[2], gray)
+                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
     # DRAW HEARTS
     for draw in range(0, current.maxHP):
         drawHeart(33+draw*55, 765, 30, red)
@@ -873,7 +855,6 @@ while True:
                             if inItem != inItem2:
                                 if draw2[0] < draw[0]+draw[2]/2+draw2[2]/2 and draw2[0] > draw[0]-draw[2]/2-draw2[2]/2 and draw2[1] < draw[1]+draw[len(draw)-3]/2+draw2[len(draw2)-3]/2 and draw2[1] > draw[1]-draw[len(draw)-3]/2-draw2[len(draw2)-3]/2:
                                     Item["pressed"] = True
-                                    break
                                 else:
                                     Item["pressed"] = False
     # DO ROOM NAME
@@ -882,14 +863,14 @@ while True:
     for Message in where.message:
         message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
     # MOVEMENT
+    if movingRight:
+        current.x += current.speed+movementMod[0]
+    if movingLeft:
+        current.x -= current.speed+movementMod[1]
+    if movingUp:
+        current.y -= current.speed+movementMod[2]
     if movingDown:
         current.y += current.speed+movementMod[3]
-    elif movingUp:
-        current.y -= current.speed+movementMod[2]
-    elif movingLeft:
-        current.x -= current.speed+movementMod[1]
-    elif movingRight:
-        current.x += current.speed+movementMod[0]
     # SQUASHED BY PROJECTILE
     if hitByProjectile[0]:
         if hitByProjectile[1] == "right" and (wallRight == False or canMoveRight == False):

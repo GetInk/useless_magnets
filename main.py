@@ -831,7 +831,7 @@ while True:
                                 if pressure == True:
                                     pressed = Item["pressed"]
                                     if pressed == False:
-                                        rect(draw[0], draw[1], draw[2], draw[2], gray)
+                                        rect(draw[0], draw[1], draw[2], draw[3], gray)
                                         rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                     else:
                                         rect(draw[0], draw[1], draw[2], draw[3], draw[4])
@@ -841,7 +841,7 @@ while True:
                             if when == inSorted:
                                 pressed = Item["pressed"]
                                 if pressed == False:
-                                    rect(draw[0], draw[1], draw[3], draw[4], gray)
+                                    rect(draw[0], draw[1], draw[2], draw[3], gray)
                                     rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                 else:
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
@@ -873,6 +873,7 @@ while True:
                             if inItem != inItem2:
                                 if draw2[0] < draw[0]+draw[2]/2+draw2[2]/2 and draw2[0] > draw[0]-draw[2]/2-draw2[2]/2 and draw2[1] < draw[1]+draw[len(draw)-3]/2+draw2[len(draw2)-3]/2 and draw2[1] > draw[1]-draw[len(draw)-3]/2-draw2[len(draw2)-3]/2:
                                     Item["pressed"] = True
+                                    break
                                 else:
                                     Item["pressed"] = False
     # DO ROOM NAME
@@ -881,14 +882,14 @@ while True:
     for Message in where.message:
         message(Message[0], Message[1], Message[2], Message[3], Message[4], screenSizeX, screenSizeY, Message[5])
     # MOVEMENT
-    if movingRight:
-        current.x += current.speed+movementMod[0]
-    if movingLeft:
-        current.x -= current.speed+movementMod[1]
-    if movingUp:
-        current.y -= current.speed+movementMod[2]
     if movingDown:
         current.y += current.speed+movementMod[3]
+    elif movingUp:
+        current.y -= current.speed+movementMod[2]
+    elif movingLeft:
+        current.x -= current.speed+movementMod[1]
+    elif movingRight:
+        current.x += current.speed+movementMod[0]
     # SQUASHED BY PROJECTILE
     if hitByProjectile[0]:
         if hitByProjectile[1] == "right" and (wallRight == False or canMoveRight == False):

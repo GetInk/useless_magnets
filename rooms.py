@@ -76,7 +76,7 @@ def loadRooms():
                         "draw":[670, 400, 190, 190, yellow, "rect"],
                         "whenDraw": 0,
                         "items":[],
-                        "pressure":True,
+                        "pressure":False,
                         "pressed":False
                     }
                 },

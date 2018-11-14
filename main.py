@@ -792,9 +792,7 @@ while True:
                     if Type != "untuchable":
                         if Type != "pedistal" and Type != "PP" and Type != "itemPP":
                             if when == inSorted:
-                                if shape == "squ":
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
-                                elif shape == "rect":
+                                if shape == "rect":
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                                 if Item["type"] == "decor":
                                     if Item["type2"] == "lava":

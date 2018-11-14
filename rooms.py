@@ -11,7 +11,7 @@ def loadRooms():
                     "block5":{
                         "name":"Block 5",
                         "type":"pedistalBlock",
-                        "draw":[400, 400, 30, gray, "squ"],
+                        "draw":[400, 400, 30, 30, gray, "rect"],
                         "whenDraw": 5
                     }
                 },
@@ -19,7 +19,7 @@ def loadRooms():
                     "block4":{
                         "name":"Block 4",
                         "type":"pedistalBlock",
-                        "draw":[400, 400, 60, cian, "squ"],
+                        "draw":[400, 400, 60, 60, cian, "rect"],
                         "whenDraw": 4
                     }
                 },
@@ -27,7 +27,7 @@ def loadRooms():
                     "block3":{
                         "name":"Block 3",
                         "type":"pedistalBlock",
-                        "draw":[400, 400, 90, blue, "squ"],
+                        "draw":[400, 400, 90, 90, blue, "rect"],
                         "whenDraw": 3
                     }
                 },
@@ -35,7 +35,7 @@ def loadRooms():
                     "block2":{
                         "name":"Block 2",
                         "type":"pedistalBlock",
-                        "draw":[400, 400, 120, purple, "squ"],
+                        "draw":[400, 400, 120, 120, purple, "rect"],
                         "whenDraw": 2
                     }
                 },
@@ -43,7 +43,7 @@ def loadRooms():
                     "block1":{
                         "name":"Block 1",
                         "type":"pedistalBlock",
-                        "draw":[400, 400, 150, darkBlue, "squ"],    
+                        "draw":[400, 400, 150, 150, darkBlue, "rect"],    
                         "whenDraw": 1
                     }
                 },
@@ -51,7 +51,7 @@ def loadRooms():
                     "pedistal1":{
                         "name":"Pedistal 1",
                         "type":"pedistal",
-                        "draw":[130, 400, 190, yellow, "squ"],
+                        "draw":[130, 400, 190, 190, yellow, "rect"],
                         "whenDraw": 0,
                         "items":[],
                         "pressure":True,
@@ -62,7 +62,7 @@ def loadRooms():
                     "pedistal2":{
                         "name":"Pedistal 2",
                         "type":"pedistal",
-                        "draw":[400, 400, 190, white, "squ"],
+                        "draw":[400, 400, 190, 190, white, "rect"],
                         "whenDraw": 0,
                         "items":["block1", "block2", "block3", "block4", "block5"],
                         "pressure":True,
@@ -73,10 +73,10 @@ def loadRooms():
                     "pedistal3":{
                         "name":"Pedistal 3",
                         "type":"pedistal",
-                        "draw":[670, 400, 190, yellow, "squ"],
+                        "draw":[670, 400, 190, 190, yellow, "rect"],
                         "whenDraw": 0,
                         "items":[],
-                        "pressure":True,
+                        "pressure":False,
                         "pressed":False
                     }
                 },
@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":True,
+                        "open":False,
                         "used":False
                     }
                 }
@@ -136,7 +136,7 @@ def loadRooms():
                         "ability":"magnet",
                         "conected":"magnet2",
                         "direction":"",
-                        "draw":[400, 400, 45, red, "squ"],
+                        "draw":[400, 400, 45, 45, red, "rect"],
                         "whenDraw":6,
                         "weight":0
                     }
@@ -177,7 +177,7 @@ def loadRooms():
                         "ability":"magnet",
                         "conected":"magnet1",
                         "direction":"",
-                        "draw":[400, 400, 45, blue, "squ"],
+                        "draw":[400, 400, 45, 45, blue, "rect"],
                         "whenDraw":6,
                         "weight":0
                     }
@@ -241,7 +241,7 @@ def loadRooms():
                     "pp":{
                         "name":"Pressure Plate",
                         "type":"itemPP",
-                        "draw":[400, 400, 200, yellow, "squ"],
+                        "draw":[400, 400, 200, 200, yellow, "rect"],
                         "pressed":False,
                         "whenDraw":0
                     }
@@ -282,7 +282,7 @@ def loadRooms():
                         "ability":"key",
                         "unlocks":"DOOR",
                         "weight":0,
-                        "draw":[400, 400, 25, orange, "squ"],
+                        "draw":[400, 400, 25, 25, orange, "rect"],
                         "whenDraw":8
                     }
                 }
@@ -402,6 +402,16 @@ def loadRooms():
                         "open":False,
                         "used":False,
                         "whenDraw":0
+                    }
+                },
+                {
+                    "heart":{
+                        "name":"Heart",
+                        "type":"heal",
+                        "heals":"max",
+                        "draw":[400, 400, 50, red, "heart"],
+                        "weight":0,
+                        "whenDraw":100
                     }
                 }
             ],

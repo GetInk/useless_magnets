@@ -113,7 +113,7 @@ movingDown = False
 movementMod = [0, 0, 0, 0]
 nearestItem = []
 doors = []
-pickableItems = ["item", "pedistalBlock", "door"]
+pickableItems = ["item", "pedistalBlock", "door", "heal"]
 anounceUnlocking = Timer()
 anounceDeath = Timer()
 damageTimer = Timer()
@@ -207,15 +207,7 @@ while True:
                                                             pedistalItem.remove(INITEM)
                                             else:
                                                 pedistalItem.remove(inTaken)
-                if isItem != "door":
-                    doTake = False
-                    current.holding += weight
-                    current.itemsB.append(takeItem)
-                    for inItemsR in range(0, len(where.itemsR)):
-                        if takeItem == where.itemsR[inItemsR]:
-                            del where.itemsR[inItemsR]
-                            break
-                else:
+                if isItem == "door":
                     for item in takeItem:
                         if takeItem[item]["open"] == True:
                             if contact(takeItem[item]["draw"]):
@@ -232,6 +224,28 @@ while True:
                                             if inItem == item:
                                                 current.x = items[inItem]["draw"][0]
                                                 current.y = items[inItem]["draw"][1]
+                elif isItem == "heal":
+                    for item in takeItem:
+                        Item = takeItem[item]
+                        if Item["heals"] == "max":
+                            current.HP = current.maxHP
+                        else:
+                            if current.HP+Item["heals"] > current.maxHP:
+                                current.HP = current.maxHP
+                            else:
+                                current.HP += Item["heals"]
+                    for inItemsR in range(0, len(where.itemsR)):
+                        if takeItem == where.itemsR[inItemsR]:
+                            del where.itemsR[inItemsR]
+                            break
+                else:
+                    doTake = False
+                    current.holding += weight
+                    current.itemsB.append(takeItem)
+                    for inItemsR in range(0, len(where.itemsR)):
+                        if takeItem == where.itemsR[inItemsR]:
+                            del where.itemsR[inItemsR]
+                            break
         nearestItem = []
         takeItem = []
     if keyPressed("lshift") and doDrop:
@@ -794,6 +808,10 @@ while True:
                             if when == inSorted:
                                 if shape == "rect":
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
+                                elif shape == "heart":
+                                    drawHeart(draw[0], draw[1], draw[2], draw[3])
+                                elif shape == "ellipse":
+                                    ellipse(draw[0], draw[1], draw[2], draw[3], draw[4])
                                 if Item["type"] == "decor":
                                     if Item["type2"] == "lava":
                                         lavaBubbles = Item["lavaBubbles"]
@@ -813,20 +831,20 @@ while True:
                                 if pressure == True:
                                     pressed = Item["pressed"]
                                     if pressed == False:
-                                        rect(draw[0], draw[1], draw[2], draw[2], gray)
-                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                        rect(draw[0], draw[1], draw[2], draw[3], gray)
+                                        rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                     else:
-                                        rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                        rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
                         elif Type == "PP" or Type == "itemPP":
                             if when == inSorted:
                                 pressed = Item["pressed"]
                                 if pressed == False:
-                                    rect(draw[0], draw[1], draw[2], draw[2], gray)
-                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[3], gray)
+                                    rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                 else:
-                                    rect(draw[0], draw[1], draw[2], draw[2], draw[3])
+                                    rect(draw[0], draw[1], draw[2], draw[3], draw[4])
     # DRAW HEARTS
     for draw in range(0, current.maxHP):
         drawHeart(33+draw*55, 765, 30, red)

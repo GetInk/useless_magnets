@@ -86,7 +86,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[15, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
-                        "open": False,
+                        "open": True,
                         "used": False
                 }
                 },
@@ -96,7 +96,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[785, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
-                        "open": False,
+                        "open": True,
                         "used": False
                     }
                 },
@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":False,
+                        "open":True,
                         "used":False
                     }
                 }
@@ -408,9 +408,9 @@ def loadRooms():
                     "heart":{
                         "name":"Heart",
                         "type":"heal",
+                        "ability":None,
                         "heals":"max",
                         "draw":[400, 400, 50, red, "heart"],
-                        "weight":0,
                         "whenDraw":100
                     }
                 }

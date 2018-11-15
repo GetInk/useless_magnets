@@ -410,7 +410,6 @@ def loadRooms():
                         "type":"heal",
                         "heals":"max",
                         "draw":[400, 400, 50, red, "heart"],
-                        "weight":0,
                         "whenDraw":100
                     }
                 }

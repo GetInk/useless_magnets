@@ -408,7 +408,6 @@ def loadRooms():
                     "heart":{
                         "name":"Heart",
                         "type":"heal",
-                        "ability":None,
                         "heals":"max",
                         "draw":[400, 400, 50, red, "heart"],
                         "whenDraw":100

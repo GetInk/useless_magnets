@@ -898,6 +898,7 @@ while True:
                                     Item["pressed"] = True
                                 else:
                                     Item["pressed"] = False
+                                    break
     # DO ROOM NAME
     message(where.roomName, white, 0, -300, 50, screenSizeX, screenSizeY, True)
     # DO ROOM MESSAGES

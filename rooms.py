@@ -86,7 +86,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[15, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
-                        "open": True,
+                        "open": False,
                         "used": False
                 }
                 },
@@ -96,7 +96,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[785, 200, 30, 105, red, "rect"],
                         "whenDraw": 0,
-                        "open": True,
+                        "open": False,
                         "used": False
                     }
                 },
@@ -106,7 +106,7 @@ def loadRooms():
                         "type":"door",
                         "draw":[400, 20, 150, 40, red, "rect"],
                         "whenDraw":0,
-                        "open":True,
+                        "open":False,
                         "used":False
                     }
                 }

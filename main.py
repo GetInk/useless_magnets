@@ -302,6 +302,14 @@ while True:
                         else:
                             draw[0] = current.x
                             draw[1] = current.y - scaleSize*11.3
+                        if draw[0] < 0+draw[2]/2:
+                            draw[0] = 0+draw[2]/2
+                        if draw[0] > screenSizeX-draw[2]/2:
+                            draw[0] = screenSizeX-draw[2]/2
+                        if draw[1] < 0+draw[3]/2:
+                            draw[1] = 0+draw[3]/2
+                        if draw[1] > screenSizeY-draw[3]/2:
+                            draw[1] = screenSizeY-draw[3]/2
                     elif isItem == "pedistalBlock" or havePB == True:
                         for droppedPB in current.itemsB:
                             for inPB in droppedPB:

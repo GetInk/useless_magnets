@@ -73,34 +73,35 @@ nextFrame = clock()
 # DEFS
 def anounce(anouncement, color=white):
     renderAnounce(anouncement, color, 25, screenSizeX, screenSizeY)
-def collideNoDirect(draw):
-    wallSize = [draw[2], draw[3]]
-    if current.x <= draw[0]+wallSize[0]/2+current.size[0] and current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y >= draw[1]-wallSize[1]/2-current.size[1] and current.y <= draw[1]+wallSize[1]/2+current.size[1]:
-        return True
-    else:
-        return False
-def collideDirect(draw, direction):
-    wallSize = [draw[2], draw[3]]
-    if direction == "right":
-        if current.x < draw[0] and current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
-            return [True, draw[0]-wallSize[0]/2-current.size[0]]
+def collide(obj1Type, draw1, obj2Type_OR_me, draw2 = None, direction = None):
+    if obj1Type == "item" and obj2Type_OR_me == "me" and direction == None:
+        wallSize = [draw1[2], draw1[3]]
+        if current.x <= draw1[0]+wallSize[0]/2+current.size[0] and current.x >= draw1[0]-wallSize[0]/2-current.size[0] and current.y >= draw1[1]-wallSize[1]/2-current.size[1] and current.y <= draw1[1]+wallSize[1]/2+current.size[1]:
+            return True
         else:
-            return [False]
-    elif direction == "left":
-        if current.x <= draw[0]+wallSize[0]/2+current.size[0] and current.x > draw[0] and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
-            return [True, draw[0]+wallSize[0]/2+current.size[0]]
-        else:
-            return [False]
-    elif direction == "up":
-        if current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y < draw[1] and current.y >= draw[1]-wallSize[1]/2-current.size[1]:
-            return [True, draw[1]-wallSize[1]/2-current.size[1]]
-        else:
-            return [False]
-    elif direction == "down":
-        if current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.y > draw[1]:
-            return [True, draw[1]+wallSize[1]/2+current.size[1]]
-        else:
-            return [False]
+            return False
+    elif obj1Type == "item" and obj2Type_OR_me == "me" and direction != None:
+        wallSize = [draw1[2], draw1[3]]
+        if direction == "right":
+            if current.x < draw[0] and current.x >= draw[0]-wallSize[0]/2-current.size[0] and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
+                return [True, draw[0]-wallSize[0]/2-current.size[0]]
+            else:
+                return [False]
+        elif direction == "left":
+            if current.x <= draw[0]+wallSize[0]/2+current.size[0] and current.x > draw[0] and current.y < draw[1]+wallSize[1]/2+current.size[1]-current.speed*1.5 and current.y > draw[1]-wallSize[1]/2-current.size[1]+current.speed*1.5:
+                return [True, draw[0]+wallSize[0]/2+current.size[0]]
+            else:
+                return [False]
+        elif direction == "up":
+            if current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y < draw[1] and current.y >= draw[1]-wallSize[1]/2-current.size[1]:
+                return [True, draw[1]-wallSize[1]/2-current.size[1]]
+            else:
+                return [False]
+        elif direction == "down":
+            if current.x < draw[0]+wallSize[0]/2+current.size[0]-current.speed*1.5 and current.x > draw[0]-wallSize[0]/2-current.size[0]+current.speed*1.5 and current.y <= draw[1]+wallSize[1]/2+current.size[1] and current.y > draw[1]:
+                return [True, draw[1]+wallSize[1]/2+current.size[1]]
+            else:
+                return [False]
 # PC SIZE FINDER VARS
 doSquare = False
 squareWidth = 135
@@ -232,7 +233,7 @@ while True:
                 if isItem == "door":
                     for item in takeItem:
                         if takeItem[item]["open"] == True:
-                            if collideNoDirect(takeItem[item]["draw"]):
+                            if collide("item", takeItem[item]["draw"], "me"):
                                 doTake = False
                                 takeItem[item]["used"] = True
                                 for inItem in takeItem:
@@ -301,6 +302,14 @@ while True:
                         else:
                             draw[0] = current.x
                             draw[1] = current.y - scaleSize*11.3
+                        if draw[0] < 0+draw[2]/2:
+                            draw[0] = 0+draw[2]/2
+                        if draw[0] > screenSizeX-draw[2]/2:
+                            draw[0] = screenSizeX-draw[2]/2
+                        if draw[1] < 0+draw[3]/2:
+                            draw[1] = 0+draw[3]/2
+                        if draw[1] > screenSizeY-draw[3]/2:
+                            draw[1] = screenSizeY-draw[3]/2
                     elif isItem == "pedistalBlock" or havePB == True:
                         for droppedPB in current.itemsB:
                             for inPB in droppedPB:
@@ -644,28 +653,28 @@ while True:
                 isWall = True
                 draw = item[inItem]["draw"]
                 wallSize = [draw[2], draw[3]]
-                if collideDirect(draw, "right")[0]:
+                if collide("item", draw, "me", None, "right")[0]:
                     canMoveRight = False
                     hitWallRight = True
-                    current.x = collideDirect(draw, "right")[1]
+                    current.x = collide("item", draw, "me", None, "right")[1]
                 elif hitWallRight == False:
                     canMoveRight = True
-                if collideDirect(draw, "left")[0]:
+                if collide("item", draw, "me", None, "left")[0]:
                     canMoveLeft = False
                     hitWallLeft = True
-                    current.x = collideDirect(draw, "left")[1]
+                    current.x = collide("item", draw, "me", None, "left")[1]
                 elif hitWallLeft == False:
                     canMoveLeft = True
-                if collideDirect(draw, "up")[0]:
+                if collide("item", draw, "me", None, "up")[0]:
                     canMoveUp = False
                     hitWallUp = True
-                    current.y = collideDirect(draw, "up")[1]
+                    current.y = collide("item", draw, "me", None, "up")[1]
                 elif hitWallUp == False:
                     canMoveUp = True
-                if collideDirect(draw, "down")[0]:
+                if collide("item", draw, "me", None, "down")[0]:
                     canMoveDown = False
                     hitWallDown = True
-                    current.y = collideDirect(draw, "down")[1]
+                    current.y = collide("item", draw, "me", None, "down")[1]
                 elif hitWallDown == False:
                     canMoveDown = True
     if isWall == False:
@@ -686,7 +695,7 @@ while True:
                                 Door = door[inDoor]
                                 draw = Door["draw"]
                                 doorSize = [draw[2], draw[3]]
-                                if collideNoDirect(draw):
+                                if collide("item", draw, "me"):
                                     if keyPressed("space"):
                                         doTake = False
                                         Door["open"] = True
@@ -720,29 +729,29 @@ while True:
             Item = item[inItem]
             if Item["type"] == "projectile":
                 draw = Item["draw"]
-                if collideDirect(draw, "right")[0]:
-                    current.x = collideDirect(draw, "right")[1]
+                if collide("item", draw, "me", None, "right")[0]:
+                    current.x = collide("item", draw, "me", None, "right")[1]
                     movingLeft = False
                     wallRight = False
                     if Item["direction"] == "left":
                         hitByProjectile[0] = True
                         hitByProjectile[1] = Item["direction"]
-                if collideDirect(draw, "left")[0]:
-                    current.x = collideDirect(draw, "left")[1]
+                if collide("item", draw, "me", None, "left")[0]:
+                    current.x = collide("item", draw, "me", None, "left")[1]
                     movingRight = False
                     wallLeft = False
                     if Item["direction"] == "right":
                         hitByProjectile[0] = True
                         hitByProjectile[1] = Item["direction"]
-                if collideDirect(draw, "up")[0]:
-                    current.y = collideDirect(draw, "up")[1]
+                if collide("item", draw, "me", None, "up")[0]:
+                    current.y = collide("item", draw, "me", None, "up")[1]
                     movingUp = False
                     wallDown = False
                     if Item["direction"] == "down":
                         hitByProjectile[0] = True
                         hitByProjectile[1] = Item["direction"]
-                if collideDirect(draw, "down")[0]:
-                    current.y = collideDirect(draw, "down")[1]
+                if collide("item", draw, "me", None, "down")[0]:
+                    current.y = collide("item", draw, "me", None, "down")[1]
                     movingDown = False
                     wallUp = False
                     if Item["direction"] == "up":
@@ -898,7 +907,6 @@ while True:
                                     Item["pressed"] = True
                                 else:
                                     Item["pressed"] = False
-                                    break
     # DO ROOM NAME
     message(where.roomName, white, 0, -300, 50, screenSizeX, screenSizeY, True)
     # DO ROOM MESSAGES
@@ -967,7 +975,7 @@ while True:
             if Item["type"] == "decor":
                 if Item["type2"] == "lava":
                     draw = Item["draw"]
-                    if collideNoDirect(draw):
+                    if collide("item", draw, "me"):
                         if damageTimer.count(7):
                             current.HP -= 1
                             damageTimer.reset()

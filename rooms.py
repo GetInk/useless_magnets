@@ -84,7 +84,7 @@ def loadRooms():
                     "door1":{
                         "name":"Door 1",
                         "type":"door",
-                        "draw":[15, 200, 30, 105, red, "rect"],
+                        "draw":[0, 200, 60, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": True,
                         "used": False
@@ -94,7 +94,7 @@ def loadRooms():
                     "door2":{
                         "name":"Door 2",
                         "type":"door",
-                        "draw":[785, 200, 30, 105, red, "rect"],
+                        "draw":[800, 200, 60, 105, red, "rect"],
                         "whenDraw": 0,
                         "open": True,
                         "used": False
@@ -104,7 +104,7 @@ def loadRooms():
                     "DOOR":{
                         "name":"Boss Door",
                         "type":"door",
-                        "draw":[400, 20, 150, 40, red, "rect"],
+                        "draw":[400, 0, 150, 80, red, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -123,7 +123,7 @@ def loadRooms():
                     "door1":{
                         "name":"Door 1",
                         "type":"door",
-                        "draw":[785, 200, 30, 105, green, "rect"],
+                        "draw":[800, 200, 60, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False,
@@ -145,7 +145,7 @@ def loadRooms():
                     "door3":{
                         "name":"Door 3",
                         "type":"door",
-                        "draw":[700, 785, 105, 30, green, "rect"],
+                        "draw":[700, 800, 105, 60, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -164,7 +164,7 @@ def loadRooms():
                     "door2":{
                         "name":"Door 2",
                         "type":"door",
-                        "draw":[15, 200, 30, 105, green, "rect"],
+                        "draw":[0, 200, 60, 105, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False,
@@ -186,7 +186,7 @@ def loadRooms():
                     "door4":{
                         "name":"Door 4",
                         "type":"door",
-                        "draw":[100, 785, 105, 30, green, "rect"],
+                        "draw":[100, 800, 105, 60, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -205,7 +205,7 @@ def loadRooms():
                     "door3":{
                         "name":"Door 3",
                         "type":"door",
-                        "draw":[94, 15, 105, 30, green, "rect"],
+                        "draw":[94, 0, 105, 60, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -215,7 +215,7 @@ def loadRooms():
                     "door4":{
                         "name":"Door 4",
                         "type":"door",
-                        "draw":[707, 15, 105, 30, green, "rect"],
+                        "draw":[707, 0, 105, 60, green, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -250,7 +250,7 @@ def loadRooms():
                     "door5":{
                         "name":"door5",
                         "type":"door",
-                        "draw":[400, 785, 105, 30, green, "rect"],
+                        "draw":[400, 800, 105, 60, green, "rect"],
                         "open":True,
                         "used":False,
                         "whenDraw":0
@@ -269,7 +269,7 @@ def loadRooms():
                     "door5":{
                         "name":"door5",
                         "type":"door",
-                        "draw":[400, 15, 105, 30, green, "rect"],
+                        "draw":[400, 0, 105, 60, green, "rect"],
                         "open":True,
                         "used":False,
                         "whenDraw":0
@@ -299,7 +299,7 @@ def loadRooms():
                     "DOOR":{
                         "name":"Boss Door",
                         "type":"door",
-                        "draw":[400, 780, 150, 40, red, "rect"],
+                        "draw":[400, 800, 150, 80, red, "rect"],
                         "whenDraw":0,
                         "open":True,
                         "used":False
@@ -379,7 +379,7 @@ def loadRooms():
                     "finalDoor":{
                         "name":"FINAL DOOR",
                         "type":"door",
-                        "draw":[400, 15, 105, 30, green, "rect"],
+                        "draw":[400, 0, 105, 60, green, "rect"],
                         "open":True,
                         "used":False,
                         "whenDraw":0
@@ -398,7 +398,7 @@ def loadRooms():
                     "finalDoor":{
                         "name":"FINAL DOOR",
                         "type":"door",
-                        "draw":[400, 785, 105, 30, green, "rect"],
+                        "draw":[400, 800, 105, 60, green, "rect"],
                         "open":False,
                         "used":False,
                         "whenDraw":0

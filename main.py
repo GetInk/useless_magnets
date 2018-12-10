@@ -535,16 +535,6 @@ while True:
             nextFrame = clock() + current.current["animationSpeed"]
         moveSprite(current.sprite, current.x, current.y, True)
 
-    # WALK OF SCREEN
-    if current.x < 0 - scaleSize*10:
-        current.x = screenSizeX + scaleSize*10
-    elif current.x > screenSizeX + scaleSize*10:
-        current.x = 0 - scaleSize*10
-    elif current.y < 0 - scaleSize*10:
-        current.y = screenSizeY + scaleSize*10
-    elif current.y > screenSizeY + scaleSize*10:
-        current.y = 0 - scaleSize*10
-
     # MAKE EDGE SCREEN A WALL
     if current.x <= current.size[0]:
         wallLeft = False
@@ -877,7 +867,7 @@ while True:
                                     rect(draw[0]-10, draw[1]-10, draw[2], draw[3], draw[4])
                                 else:
                                     rect(draw[0], draw[1], draw[2], draw[3], draw[4])
-    # DRAW HEARTS
+    # DRAW HP/HEARTS
     for draw in range(0, current.maxHP):
         drawHeart(33+draw*55, 765, 30, red)
     for draw in range(0, current.maxHP-current.HP):

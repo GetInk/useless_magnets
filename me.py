@@ -21,7 +21,6 @@ def loadMe():
             "X": 400,
             "Y": 400,
             "speed": 15,
-            "image": 0,
             "animationSpeed": 250,
             "weightLimit": 15,
             "size":[67.5, 135],

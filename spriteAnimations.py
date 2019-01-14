@@ -1,6 +1,6 @@
 from pygame_functions import *
 
-def loadButcher():
+def loadButcherAnimation():
     butcher = makeSprite("sprites/Butcher/stand forward 1.png")
     # 1-4   MOVE RIGHT
     addSpriteImage(butcher,"sprites/Butcher/walking right 1.png")

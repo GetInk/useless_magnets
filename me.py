@@ -1,4 +1,4 @@
-from spriteAnimations import *
+from characters import *
 
 def loadMe():
     me = {
@@ -17,7 +17,7 @@ def loadMe():
             },
             "HP":10,
             "maxHP":10,
-            "sprite": loadButcher(),
+            "sprite": loadButcherAnimation(),
             "X": 400,
             "Y": 400,
             "speed": 15,

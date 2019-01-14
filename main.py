@@ -163,8 +163,11 @@ showSprite(current.sprite)
 changeSpriteImageNoSmoothing(current.sprite, current.image)
 transformSpriteNoSmoothing(current.sprite, 0, scaleSize)
 
+
 while True:
     clearShapes()
+
+    drawEnemy(200, 200)
 
     # PC SIZE MESSURER
     if doSquare == True:

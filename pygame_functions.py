@@ -4,6 +4,7 @@
 # Report bugs at https://github.com/StevePaget/Pygame_Functions/issues
 
 import pygame, math, sys, os, random
+from colors import *
 
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
@@ -564,7 +565,15 @@ def drawHeart(centreX, centreY, size, colour):
     ellipse(centreX-(11.0/30.0)*size, centreY-(4.0/30.0)*size, size, size, colour)
     ellipse(centreX+(11.0/30.0)*size, centreY-(4.0/30.0)*size, size, size, colour)
     drawTriangle(centreX-(21.5/30.0)*size, centreY+(6.7/30.0)*size, centreX+(21.5/30.0)*size, centreY+(6.7/30.0)*size, centreX, centreY+(26.0/30.0)*size, colour)
-    ellipse(centreX, centreY+(6.5/30)*size, (5/30.0)*size, (5/30.0)*size, colour)
+    ellipse(centreX, centreY+(6.5/30)*size, (10/30.0)*size, (10/30.0)*size, colour)
+
+def drawEnemy(x, y):
+    rect(x, y, 50, 50, purple)
+    ellipse(x, y, 30, 30, red)
+    drawTriangle(x-12, y+25, x+12, y+25, x, y+35, bloodRed)
+    drawTriangle(x-12, y-26, x+12, y-26, x, y-36, bloodRed)
+    drawTriangle(x-26, y-12, x-26, y+12, x-36, y, bloodRed)
+    drawTriangle(x+25, y-12, x+25, y+12, x+35, y, bloodRed)
 
 
 def clearShapes():
